@@ -8,7 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun TaskDetailScreen() {
+fun TaskDetailScreen(
+    modifier: Modifier,
+) {
 
     Box(
         modifier = Modifier.fillMaxSize(),

@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.navigation
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -22,9 +23,9 @@ fun AppNavGraph(
         startDestination = Screen.HomeScreen.route
     ) {
         composable(route = Screen.HomeScreen.route) {
-            Scaffold() {
+            Scaffold() { paddingValues ->
                 HomeScreen(
-                    modifier = Modifier,
+                    modifier = Modifier.padding(paddingValues),
                     onToDoClick = {
                         navController.navigate(Screen.TaskListScreen.route)
                     },
@@ -37,8 +38,9 @@ fun AppNavGraph(
         }
 
         composable(route = Screen.TaskListScreen.route) {
-            Scaffold() {
+            Scaffold() { paddingValues ->
                 TaskListScreen(
+                    modifier = Modifier.padding(paddingValues),
                     onCreateClick = {
                         navController.navigate(Screen.CreateEditTaskScreen.route)
                     },
@@ -50,8 +52,10 @@ fun AppNavGraph(
         }
 
         composable(route = Screen.CreateEditTaskScreen.route) {
-            Scaffold() {
-                CreateEditTaskScreen()
+            Scaffold() { paddingValues ->
+                CreateEditTaskScreen(
+                    modifier = Modifier.padding(paddingValues),
+                )
             }
         }
 
@@ -59,8 +63,10 @@ fun AppNavGraph(
             route = Screen.TaskDetailScreen.route,
             arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) {
-            Scaffold() {
-                TaskDetailScreen()
+            Scaffold() { paddingValues ->
+                TaskDetailScreen(
+                    modifier = Modifier.padding(paddingValues),
+                )
             }
         }
 

@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun TaskListScreen(
+    modifier: Modifier,
     onCreateClick: () -> Unit = {},
     onItemClick: () -> Unit = {}
 ) {
