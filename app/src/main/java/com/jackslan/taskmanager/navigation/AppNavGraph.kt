@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.navigation
 
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -21,37 +22,46 @@ fun AppNavGraph(
         startDestination = Screen.HomeScreen.route
     ) {
         composable(route = Screen.HomeScreen.route) {
-            HomeScreen(
-                modifier = Modifier,
-                onToDoClick = {
-                    navController.navigate(Screen.TaskListScreen.route)
-                },
-                onCompletedClick = {
-                    navController.navigate(Screen.TaskListScreen.route)
-                }
-            )
+            Scaffold() {
+                HomeScreen(
+                    modifier = Modifier,
+                    onToDoClick = {
+                        navController.navigate(Screen.TaskListScreen.route)
+                    },
+                    onCompletedClick = {
+                        navController.navigate(Screen.TaskListScreen.route)
+                    }
+                )
+            }
+
         }
 
         composable(route = Screen.TaskListScreen.route) {
-            TaskListScreen(
-                onCreateClick = {
-                    navController.navigate(Screen.CreateEditTaskScreen.route)
-                },
-                onItemClick = {
-                    navController.navigate(Screen.TaskDetailScreen.createRoute(1))
-                }
-            )
+            Scaffold() {
+                TaskListScreen(
+                    onCreateClick = {
+                        navController.navigate(Screen.CreateEditTaskScreen.route)
+                    },
+                    onItemClick = {
+                        navController.navigate(Screen.TaskDetailScreen.createRoute(1))
+                    }
+                )
+            }
         }
 
         composable(route = Screen.CreateEditTaskScreen.route) {
-            CreateEditTaskScreen()
+            Scaffold() {
+                CreateEditTaskScreen()
+            }
         }
 
         composable(
             route = Screen.TaskDetailScreen.route,
             arguments = listOf(navArgument("itemId") { type = NavType.IntType })
         ) {
-            TaskDetailScreen()
+            Scaffold() {
+                TaskDetailScreen()
+            }
         }
 
     }
