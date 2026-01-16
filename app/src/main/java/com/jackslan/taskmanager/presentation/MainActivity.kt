@@ -4,11 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.ui.Modifier
-import com.jackslan.taskmanager.presentation.features.home.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.jackslan.taskmanager.navigation.AppNavGraph
 import com.jackslan.taskmanager.presentation.theme.TaskManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -16,12 +13,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+
+            val navController = rememberNavController()
+
             TaskManagerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HomeScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                AppNavGraph(
+                    navController = navController
+                )
             }
         }
     }

@@ -10,7 +10,11 @@ import com.jackslan.taskmanager.presentation.components.HomeItemCard
 import com.jackslan.taskmanager.presentation.components.WeatherSectionCard
 
 @Composable
-fun HomeScreen(modifier: Modifier) {
+fun HomeScreen(
+    modifier: Modifier,
+    onToDoClick: () -> Unit = {},
+    onCompletedClick: () -> Unit = {}
+) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
     ) {
@@ -22,7 +26,7 @@ fun HomeScreen(modifier: Modifier) {
             HomeItemCard(
                 title = "To Do",
                 icon = R.drawable.unchecked_icon,
-                onClick = {}
+                onClick = onToDoClick
             )
         }
 
@@ -30,7 +34,7 @@ fun HomeScreen(modifier: Modifier) {
             HomeItemCard(
                 title = "Completed",
                 icon = R.drawable.checked_icon,
-                onClick = {}
+                onClick = onCompletedClick
             )
         }
     }
