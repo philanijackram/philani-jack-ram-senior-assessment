@@ -27,7 +27,7 @@ fun WeatherSectionCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
+            .padding(vertical = 16.dp, horizontal = 8.dp),
         elevation = CardDefaults.cardElevation(10.dp)
     ) {
         Row(
@@ -39,7 +39,7 @@ fun WeatherSectionCard(
         ) {
             Column() {
                 Text(text = "Friday", fontWeight = FontWeight.Bold)
-                Text(text="16 Jan 26",modifier= Modifier.padding(vertical = 8.dp))
+                Text(text = "16 Jan 26", modifier = Modifier.padding(vertical = 8.dp))
                 Text("Johannesburg")
             }
 
@@ -53,8 +53,7 @@ fun WeatherSectionCard(
         }
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-               ,
+                .fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {

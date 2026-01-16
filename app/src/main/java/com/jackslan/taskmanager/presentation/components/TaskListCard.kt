@@ -27,29 +27,30 @@ fun TaskListCard(
             .padding(4.dp),
         elevation = CardDefaults.cardElevation(10.dp)
     ) {
+
         Column(
-            modifier = Modifier
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         ) {
+
             Text(
                 text = title,
                 modifier = Modifier.padding(8.dp),
                 fontWeight = FontWeight.Bold,
                 fontSize = 20.sp
             )
-            LazyColumn(
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                items(todoItems.size) {
-                    TaskItemCard(
-                        title= todoItems[it].title,
-                        description = todoItems[it].description,
-                        isCompleted = todoItems[it].isCompleted
-                    )
-                }
+
+            repeat(2) {
+                TaskItemCard(
+                    title = todoItems[it].title,
+                    description = todoItems[it].description,
+                    isCompleted = todoItems[it].isCompleted
+                )
             }
+
+
         }
     }
+
 }
 
 @Preview(showBackground = true)
