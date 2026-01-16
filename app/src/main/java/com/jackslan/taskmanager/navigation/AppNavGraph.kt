@@ -23,17 +23,8 @@ fun AppNavGraph(
         startDestination = Screen.HomeScreen.route
     ) {
         composable(route = Screen.HomeScreen.route) {
-            Scaffold() { paddingValues ->
-                HomeScreen(
-                    modifier = Modifier.padding(paddingValues),
-                    onToDoClick = {
-                        navController.navigate(Screen.TaskListScreen.route)
-                    },
-                    onCompletedClick = {
-                        navController.navigate(Screen.TaskListScreen.route)
-                    }
-                )
-            }
+
+            HomeScreen()
 
         }
 
