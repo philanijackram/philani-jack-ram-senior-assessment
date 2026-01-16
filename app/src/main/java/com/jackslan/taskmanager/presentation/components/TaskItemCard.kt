@@ -23,7 +23,7 @@ import com.jackslan.taskmanager.R
 @Composable
 fun TaskItemCard(
     title: String = "Task 1",
-    description: String = "Description of Task 1",
+    description: String? = "Description of Task 1",
     isCompleted: Boolean = false
 ) {
     Card(
@@ -59,15 +59,15 @@ fun TaskItemCard(
                     text = title
                 )
 
-                Spacer(modifier = Modifier.height(8.dp))
+                description?.let {
+                    Spacer(modifier = Modifier.height(8.dp))
 
-
-                Text(
-                    fontWeight = FontWeight.Light,
-                    text = description,
-                )
+                    Text(
+                        fontWeight = FontWeight.Light,
+                        text = description,
+                    )
+                }
             }
-
         }
     }
 }
