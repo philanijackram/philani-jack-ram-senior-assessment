@@ -1,0 +1,83 @@
+package com.jackslan.taskmanager.presentation.components
+
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+
+@Preview(showBackground = true)
+@Composable
+fun FilterPills(
+    modifier: Modifier = Modifier,
+    filterOptions: List<String> = listOf("ALL", "TO DO", "COMPLETED")
+) {
+    var selectedOption by remember { mutableStateOf(filterOptions[0]) }
+
+    LazyRow(
+        modifier = Modifier.fillMaxWidth(),
+        contentPadding = PaddingValues(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(filterOptions) { filterOption ->
+            val isSelected = filterOption == selectedOption
+            Card(
+                modifier = Modifier
+                    .padding(4.dp)
+                    .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
+                    .shadow(4.dp, RoundedCornerShape(16.dp))
+                    .clickable { selectedOption = filterOption },
+                colors = CardDefaults.cardColors(
+                    containerColor = if (isSelected) {
+                        if (!isSystemInDarkTheme()) Color(0xFF5E5D5D) else Color(0xFFFDFDFD)
+                    } else {
+                        if (!isSystemInDarkTheme()) Color(0xFFFDFDFD) else Color(0xFF5E5D5D)
+                    },
+                    contentColor = if (isSelected) {
+                        if (!isSystemInDarkTheme()) Color.White else Color.Black
+                    } else {
+                        if (!isSystemInDarkTheme()) Color.Black else Color.White
+                    }
+                ),
+                elevation = CardDefaults.cardElevation(2.dp)
+
+            ) {
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+
+                ) {
+                    Text(
+                        text = filterOption,
+                        style = MaterialTheme.typography.bodyMedium
+
+                    )
+                }
+            }
+
+
+        }
+
+    }
+
+}
