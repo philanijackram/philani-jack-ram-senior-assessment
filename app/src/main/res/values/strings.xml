@@ -11,4 +11,9 @@
     <string name="settings_icon">settings icon</string>
     <string name="navigation_icon">Navigation Icon</string>
     <string name="task_manager">Task Manager</string>
+    <string name="delete_task">Delete Task</string>
+    <string name="are_you_sure_you_want_to_delete_this_task">Are you sure you want to delete this task?</string>
+    <string name="check_indicator">Check indicator</string>
+    <string name="completed">Completed</string>
+    <string name="update">Update</string>
 </resources>

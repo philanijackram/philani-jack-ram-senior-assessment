@@ -10,6 +10,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -52,7 +53,7 @@ fun CreateNewTaskBottomSheet(
                 modifier = Modifier.padding(8.dp)
             )
 
-            TextField(
+            OutlinedTextField(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
@@ -61,7 +62,7 @@ fun CreateNewTaskBottomSheet(
                 label = { Text(stringResource(R.string.title)) }
             )
 
-            TextField(
+            OutlinedTextField(
                 value = description,
                 modifier = Modifier
                     .fillMaxWidth()

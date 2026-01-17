@@ -8,9 +8,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,7 +30,8 @@ import com.jackslan.taskmanager.domain.model.dummyTodoList
 fun TaskItemCard(
     taskItem: TaskItem = dummyTodoList[0],
     onCheckedChange: (Int) -> Unit = {},
-    onItemClick: (TaskItem) -> Unit = {}
+    onItemClick: (TaskItem) -> Unit = {},
+    onDeleteClick: (Int) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -39,44 +43,60 @@ fun TaskItemCard(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                painter = painterResource(
-                    if (taskItem.isCompleted) {
-                        R.drawable.checked_icon
-                    } else {
-                        R.drawable.unchecked_icon
-                    }
-                ),
-                contentDescription = "Check indicator",
+            Row(
                 modifier = Modifier
-                    .padding(end = 16.dp)
-                    .clickable {
-                        onCheckedChange(taskItem.id)
-                    }
-            )
-
-            Column(
-                modifier = Modifier.weight(1f)
+                    .weight(1f)
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Text(
-                    fontWeight = FontWeight.Bold,
-                    text = taskItem.title
+                Icon(
+                    painter = painterResource(
+                        if (taskItem.isCompleted) {
+                            R.drawable.checked_icon
+                        } else {
+                            R.drawable.unchecked_icon
+                        }
+                    ),
+                    contentDescription = "Check indicator",
+                    modifier = Modifier
+                        .padding(end = 16.dp)
+                        .clickable {
+                            onCheckedChange(taskItem.id)
+                        }
                 )
 
-                taskItem.description?.let { description ->
-                    Spacer(modifier = Modifier.height(8.dp))
-
+                Column(
+                    modifier = Modifier.weight(1f)
+                ) {
                     Text(
-                        fontWeight = FontWeight.Light,
-                        text = description,
+                        fontWeight = FontWeight.Bold,
+                        text = taskItem.title
                     )
+
+                    taskItem.description?.let { description ->
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Text(
+                            fontWeight = FontWeight.Light,
+                            text = description,
+                        )
+                    }
                 }
             }
+
+            IconButton(
+                modifier = Modifier.padding(16.dp).weight(0.2f),
+                onClick = { onDeleteClick(taskItem.id) }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Delete icon"
+                )
+            }
         }
+
     }
 }
 

@@ -14,7 +14,8 @@ fun TaskListSection(
     modifier: Modifier = Modifier,
     todoList: List<TaskItem> = dummyTodoList,
     onItemClick: (TaskItem) -> Unit = {},
-    onCheckedChange: (Int) -> Unit = {}
+    onCheckedChange: (Int) -> Unit = {},
+    onDeleteClick: (Int) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
@@ -23,7 +24,9 @@ fun TaskListSection(
             TaskItemCard(
                 taskItem = todoList[it],
                 onCheckedChange = onCheckedChange,
-                onItemClick = onItemClick
+                onItemClick = onItemClick,
+                onDeleteClick = onDeleteClick
+
             )
         }
     }

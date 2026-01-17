@@ -1,23 +1,8 @@
 package com.jackslan.taskmanager.presentation.features.home
 
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.FabPosition
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme.typography
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -25,20 +10,19 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.components.ActionConfirmationDialog
 import com.jackslan.taskmanager.presentation.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
 import com.jackslan.taskmanager.presentation.components.MainScaffold
-import com.jackslan.taskmanager.presentation.components.MinimalDialog
 import com.jackslan.taskmanager.presentation.components.TaskListSection
+import com.jackslan.taskmanager.presentation.components.ViewEditTaskDialog
 import com.jackslan.taskmanager.presentation.components.WeatherSection
 import kotlinx.coroutines.launch
 
@@ -54,9 +38,11 @@ fun HomeScreen(
 
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
-    var showBottomSheet by remember { mutableStateOf(false) }
 
-    var showDialogBox by remember { mutableStateOf(false) }
+    var showCreateTaskBottomSheet by remember { mutableStateOf(false) }
+    var showTaskDetailsDialog by remember { mutableStateOf(false) }
+    var showDeleteConfirmationDialog by remember { mutableStateOf(false) }
+
     var currentItem by remember { mutableStateOf<TaskItem?>(null) }
 
 
@@ -67,7 +53,7 @@ fun HomeScreen(
         fabIcon = R.drawable.add_icon,
         showSettings = true,
         onFabClick = {
-            showBottomSheet = true
+            showCreateTaskBottomSheet = true
         }
     ) {
         Column(
@@ -81,15 +67,18 @@ fun HomeScreen(
             TaskListSection(
                 todoList = todoList,
                 onItemClick = {
-                    showDialogBox = true
+                    showTaskDetailsDialog = true
                     currentItem = it
                 },
                 onCheckedChange = {
 
+                },
+                onDeleteClick = {
+                    showDeleteConfirmationDialog = true
                 }
             )
 
-            if (showBottomSheet) {
+            if (showCreateTaskBottomSheet) {
                 CreateNewTaskBottomSheet(
                     title = title,
                     description = description,
@@ -99,7 +88,7 @@ fun HomeScreen(
 
                         scope.launch { sheetState.hide() }.invokeOnCompletion {
                             if (!sheetState.isVisible) {
-                                showBottomSheet = false
+                                showCreateTaskBottomSheet = false
                             }
                         }
 
@@ -109,7 +98,7 @@ fun HomeScreen(
                     onConfirm = {
                         scope.launch { sheetState.hide() }.invokeOnCompletion {
                             if (!sheetState.isVisible) {
-                                showBottomSheet = false
+                                showCreateTaskBottomSheet = false
                             }
                         }
                         title = ""
@@ -118,10 +107,30 @@ fun HomeScreen(
                 )
             }
 
-            if (showDialogBox) {
-                MinimalDialog(
-                    onDismissRequest = { showDialogBox = false },
-                    taskItem = currentItem
+            if (showTaskDetailsDialog) {
+                currentItem?.let { item ->
+                    ViewEditTaskDialog(
+                        onDismissRequest = { showTaskDetailsDialog = false },
+                        taskItem = item
+                    )
+                }
+
+            }
+
+            if (showDeleteConfirmationDialog) {
+                ActionConfirmationDialog(
+                    title = stringResource(R.string.delete_task),
+                    message = stringResource(R.string.are_you_sure_you_want_to_delete_this_task),
+                    onPositiveClick = {
+                        showDeleteConfirmationDialog = false
+                    },
+                    onNegativeClick = {
+                        showDeleteConfirmationDialog = false
+                    },
+                    onDismissRequest = {
+                        showDeleteConfirmationDialog = false
+                    }
+
                 )
             }
         }
