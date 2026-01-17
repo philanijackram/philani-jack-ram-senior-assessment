@@ -69,9 +69,11 @@ fun AppNavGraph(
         composable(
             route = Screen.SettingsScreen.route
         ) {
-            Scaffold() { paddingValues ->
-                SettingsScreen(modifier = Modifier.padding(paddingValues))
-            }
+            SettingsScreen(
+                onBackClick = {
+                    navController.popBackStack()
+                }
+            )
         }
 
     }

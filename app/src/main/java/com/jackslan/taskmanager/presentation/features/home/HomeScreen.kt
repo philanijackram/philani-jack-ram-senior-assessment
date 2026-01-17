@@ -36,6 +36,7 @@ import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
 import com.jackslan.taskmanager.presentation.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
+import com.jackslan.taskmanager.presentation.components.MainScaffold
 import com.jackslan.taskmanager.presentation.components.TaskListSection
 import com.jackslan.taskmanager.presentation.components.WeatherSection
 import kotlinx.coroutines.launch
@@ -54,65 +55,28 @@ fun HomeScreen(
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
 
-    Scaffold(
-        modifier = modifier
-            .fillMaxSize(),
-        topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .safeDrawingPadding()
-                    .height(56.dp)
-                    .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                IconButton(
-                    onClick = { /*TODO*/ }
-                ) {
-//                    Icon(
-//                        painterResource(R.drawable.pending_status_icon),
-//                        contentDescription = "icon"
-//                    )
-                }
-
-                Text(
-                    text = "Task Manager",
-                    style = typography.titleLarge,
-                    fontWeight = FontWeight.Bold
-                )
-
-                IconButton(
-                    onClick = onSettingsClick
-                ) {
-                    Icon(
-                        imageVector = Icons.Default.Settings,
-                        "image"
-                    )
-                }
-            }
-        },
-        floatingActionButton = {
-            FloatingActionButton(onClick = { showBottomSheet = true }) {
-                Icon(
-                    painter = painterResource(R.drawable.add_icon),
-                    contentDescription = "FAB"
-                )
-            }
-        },
-        floatingActionButtonPosition = FabPosition.End,
-
-        ) { paddingValues ->
+    MainScaffold(
+        title = "Task Manager",
+        onSettingsClick = onSettingsClick,
+        showFab = true,
+        fabIcon = R.drawable.add_icon,
+        showSettings = true,
+        onFabClick = {
+            showBottomSheet = true
+        }
+    ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+            modifier = Modifier.padding(top = 60.dp)
         ) {
+
             WeatherSection()
 
             FilterPills()
 
-            TaskListSection()
+            TaskListSection(
+
+                todoList = todoList
+            )
 
             if (showBottomSheet) {
                 CreateNewTaskBottomSheet(
@@ -145,7 +109,6 @@ fun HomeScreen(
 
         }
     }
-
 
 }
 
