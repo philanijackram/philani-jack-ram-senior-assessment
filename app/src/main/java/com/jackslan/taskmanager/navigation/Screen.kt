@@ -7,5 +7,6 @@ sealed class Screen(val route: String) {
     object TaskDetailScreen : Screen("task_detail_screen/{itemId}") {
         fun createRoute(itemId: Int) = "task_detail_screen/$itemId"
     }
+    object SettingsScreen : Screen("settings_screen")
 }
 

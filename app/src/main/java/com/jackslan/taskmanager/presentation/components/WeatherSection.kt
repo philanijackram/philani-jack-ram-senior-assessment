@@ -20,7 +20,7 @@ import com.jackslan.taskmanager.domain.model.dummyWeatherData
 import com.jackslan.taskmanager.utils.AstroType
 
 @Composable
-fun WeatherSectionCard(
+fun WeatherSection(
     modifier: Modifier = Modifier,
     weatherItem: WeatherItem = dummyWeatherData
 ) {
@@ -76,6 +76,6 @@ fun WeatherSectionCard(
 
 @Preview(showBackground = true)
 @Composable
-fun WeatherCardPreview() {
-    WeatherSectionCard()
+fun WeatherPreview() {
+    WeatherSection()
 }

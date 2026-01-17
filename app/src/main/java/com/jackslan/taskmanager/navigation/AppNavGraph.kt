@@ -11,6 +11,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.jackslan.taskmanager.presentation.features.create_edit_task.CreateEditTaskScreen
 import com.jackslan.taskmanager.presentation.features.home.HomeScreen
+import com.jackslan.taskmanager.presentation.features.settings.SettingsScreen
 import com.jackslan.taskmanager.presentation.features.task_details.TaskDetailScreen
 import com.jackslan.taskmanager.presentation.features.task_list.TaskListScreen
 
@@ -24,7 +25,11 @@ fun AppNavGraph(
     ) {
         composable(route = Screen.HomeScreen.route) {
 
-            HomeScreen()
+            HomeScreen(
+                onSettingsClick = {
+                    navController.navigate(Screen.SettingsScreen.route)
+                }
+            )
 
         }
 
@@ -58,6 +63,14 @@ fun AppNavGraph(
                 TaskDetailScreen(
                     modifier = Modifier.padding(paddingValues),
                 )
+            }
+        }
+
+        composable(
+            route = Screen.SettingsScreen.route
+        ) {
+            Scaffold() { paddingValues ->
+                SettingsScreen(modifier = Modifier.padding(paddingValues))
             }
         }
 

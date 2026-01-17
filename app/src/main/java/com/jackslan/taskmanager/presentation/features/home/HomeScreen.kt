@@ -1,20 +1,23 @@
 package com.jackslan.taskmanager.presentation.features.home
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.Button
+import androidx.compose.foundation.layout.safeDrawingPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,29 +25,73 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
-import com.jackslan.taskmanager.presentation.components.TaskItemCard
-import com.jackslan.taskmanager.presentation.components.WeatherSectionCard
+import com.jackslan.taskmanager.presentation.components.TaskListSection
+import com.jackslan.taskmanager.presentation.components.WeatherSection
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
+    onSettingsClick: () -> Unit = {},
     todoList: List<TaskItem> = dummyTodoList
 ) {
+    var title by remember { mutableStateOf("") }
+    var description by remember { mutableStateOf("") }
 
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
 
     Scaffold(
+        modifier = modifier
+            .fillMaxSize(),
+        topBar = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .safeDrawingPadding()
+                    .height(56.dp)
+                    .padding(horizontal = 16.dp),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                IconButton(
+                    onClick = { /*TODO*/ }
+                ) {
+//                    Icon(
+//                        painterResource(R.drawable.pending_status_icon),
+//                        contentDescription = "icon"
+//                    )
+                }
+
+                Text(
+                    text = "Task Manager",
+                    style = typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
+
+                IconButton(
+                    onClick = onSettingsClick
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Settings,
+                        "image"
+                    )
+                }
+            }
+        },
         floatingActionButton = {
             FloatingActionButton(onClick = { showBottomSheet = true }) {
                 Icon(
@@ -61,72 +108,41 @@ fun HomeScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
-            WeatherSectionCard()
+            WeatherSection()
 
             FilterPills()
 
-            LazyColumn(
-                modifier = modifier.fillMaxSize()
-            ) {
-                items(todoList.size) {
-                    TaskItemCard(
-                        title = todoList[it].title,
-                        description = todoList[it].description,
-                        isCompleted = todoList[it].isCompleted
-                    )
-                }
-            }
+            TaskListSection()
+
             if (showBottomSheet) {
-                ModalBottomSheet(
-                    modifier = Modifier.fillMaxWidth(),
-                    onDismissRequest = {
-                        showBottomSheet = false
+                CreateNewTaskBottomSheet(
+                    title = title,
+                    description = description,
+                    onTitleChange = { title = it },
+                    onDescriptionChange = { description = it },
+                    onDismiss = {
+
+                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                            if (!sheetState.isVisible) {
+                                showBottomSheet = false
+                            }
+                        }
+
+                        title = ""
+                        description = ""
                     },
-                    sheetState = sheetState
-                ) {
-                    TextField(
-                        value = "",
-                        onValueChange = {},
-                        label = { Text("Title") }
-                    )
-
-                    TextField(
-                        value = "",
-                        onValueChange = {},
-                        label = { Text("Description") }
-                    )
-
-                    Row(){
-                        // Sheet content
-                        Button(
-                            modifier = Modifier.weight(1f),
-                            onClick = {
-                            scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                if (!sheetState.isVisible) {
-                                    showBottomSheet = false
-                                }
+                    onConfirm = {
+                        scope.launch { sheetState.hide() }.invokeOnCompletion {
+                            if (!sheetState.isVisible) {
+                                showBottomSheet = false
                             }
-                        }) {
-                            Text("Hide bottom sheet")
                         }
-
-                        // Sheet content
-                        Button(
-                            modifier = Modifier.weight(1f),
-                            onClick = {
-                            scope.launch { sheetState.hide() }.invokeOnCompletion {
-                                if (!sheetState.isVisible) {
-                                    showBottomSheet = false
-                                }
-                            }
-                        }) {
-                            Text("Hide bottom sheet")
-                        }
-                    }
-
-
-                }
+                        title = ""
+                        description = ""
+                    },
+                )
             }
+
         }
     }
 
