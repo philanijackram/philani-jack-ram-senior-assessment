@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.safe.args)
+    id("kotlin-kapt")
 }
 
 android {
@@ -38,6 +41,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -59,5 +63,23 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
     //Navigation
-    implementation("androidx.navigation:navigation-compose:2.9.6")
+    implementation(libs.androidx.navigation.compose)
+    //Room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+
+    //hilt + navigation +  viewmodel
+    implementation(libs.viewmodel)
+    implementation(libs.compose.viewmodel)
+    implementation(libs.hilt)
+    implementation(libs.hilt.navigation.compose)
+    implementation(libs.hilt.navigation.fragment)
+    kapt(libs.hilt.compiler)
+    implementation(libs.navigation.fragment)
+    implementation(libs.navigation.ui)
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+
 }
