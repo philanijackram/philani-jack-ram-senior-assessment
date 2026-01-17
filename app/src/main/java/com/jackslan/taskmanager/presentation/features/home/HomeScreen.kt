@@ -37,6 +37,7 @@ import com.jackslan.taskmanager.domain.model.dummyTodoList
 import com.jackslan.taskmanager.presentation.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
 import com.jackslan.taskmanager.presentation.components.MainScaffold
+import com.jackslan.taskmanager.presentation.components.MinimalDialog
 import com.jackslan.taskmanager.presentation.components.TaskListSection
 import com.jackslan.taskmanager.presentation.components.WeatherSection
 import kotlinx.coroutines.launch
@@ -54,6 +55,10 @@ fun HomeScreen(
     val sheetState = rememberModalBottomSheetState()
     val scope = rememberCoroutineScope()
     var showBottomSheet by remember { mutableStateOf(false) }
+
+    var showDialogBox by remember { mutableStateOf(false) }
+    var currentItem by remember { mutableStateOf<TaskItem?>(null) }
+
 
     MainScaffold(
         title = "Task Manager",
@@ -74,8 +79,14 @@ fun HomeScreen(
             FilterPills()
 
             TaskListSection(
+                todoList = todoList,
+                onItemClick = {
+                    showDialogBox = true
+                    currentItem = it
+                },
+                onCheckedChange = {
 
-                todoList = todoList
+                }
             )
 
             if (showBottomSheet) {
@@ -107,6 +118,12 @@ fun HomeScreen(
                 )
             }
 
+            if (showDialogBox) {
+                MinimalDialog(
+                    onDismissRequest = { showDialogBox = false },
+                    taskItem = currentItem
+                )
+            }
         }
     }
 

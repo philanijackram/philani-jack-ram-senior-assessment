@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.presentation.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,17 +20,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.domain.model.TaskItem
+import com.jackslan.taskmanager.domain.model.dummyTodoList
 
 @Composable
 fun TaskItemCard(
-    title: String = "Task 1",
-    description: String? = "Description of Task 1",
-    isCompleted: Boolean = false
+    taskItem: TaskItem = dummyTodoList[0],
+    onCheckedChange: (Int) -> Unit = {},
+    onItemClick: (TaskItem) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .clickable { onItemClick(taskItem) },
         elevation = CardDefaults.cardElevation(10.dp)
     ) {
         Row(
@@ -41,14 +45,18 @@ fun TaskItemCard(
         ) {
             Icon(
                 painter = painterResource(
-                    if (isCompleted) {
+                    if (taskItem.isCompleted) {
                         R.drawable.checked_icon
                     } else {
                         R.drawable.unchecked_icon
                     }
                 ),
                 contentDescription = "Check indicator",
-                modifier = Modifier.padding(end = 16.dp)
+                modifier = Modifier
+                    .padding(end = 16.dp)
+                    .clickable {
+                        onCheckedChange(taskItem.id)
+                    }
             )
 
             Column(
@@ -56,10 +64,10 @@ fun TaskItemCard(
             ) {
                 Text(
                     fontWeight = FontWeight.Bold,
-                    text = title
+                    text = taskItem.title
                 )
 
-                description?.let {
+                taskItem.description?.let { description ->
                     Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
