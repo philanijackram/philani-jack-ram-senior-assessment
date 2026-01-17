@@ -3,7 +3,17 @@ package com.jackslan.taskmanager.di
 import android.content.Context
 import androidx.room.Room
 import com.jackslan.taskmanager.data.local.AppDatabase
+import com.jackslan.taskmanager.data.local.ToDoDao
 import com.jackslan.taskmanager.data.remote.api.WeatherApiService
+import com.jackslan.taskmanager.data.repository.ToDoRepositoryImpl
+import com.jackslan.taskmanager.domain.repository.ToDoRepository
+import com.jackslan.taskmanager.domain.use_case.DeleteTaskUseCase
+import com.jackslan.taskmanager.domain.use_case.GetAllTasksUseCase
+import com.jackslan.taskmanager.domain.use_case.GetCompletedTasksUseCase
+import com.jackslan.taskmanager.domain.use_case.GetIncompleteTasksUsesCase
+import com.jackslan.taskmanager.domain.use_case.GetTaskByIdUseCase
+import com.jackslan.taskmanager.domain.use_case.UpdateTaskStatusUseCase
+import com.jackslan.taskmanager.domain.use_case.UpdateTaskUseCase
 import com.jackslan.taskmanager.utils.ImportantStrings
 import dagger.Module
 import dagger.Provides
@@ -42,6 +52,53 @@ class AppModule {
 
     @Provides
     fun provideToDoDao(database: AppDatabase) = database.toDoDao()
+
+    @Provides
+    fun provideToDoRepository(toDoDao: ToDoDao): ToDoRepository {
+        return ToDoRepositoryImpl(toDoDao)
+    }
+
+    //Use Cases
+
+    @Provides
+    fun provideCreateNewTaskUseCase(toDoRepository: ToDoRepository): GetAllTasksUseCase {
+        return GetAllTasksUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideGetAllTasksUseCase(toDoRepository: ToDoRepository): GetAllTasksUseCase {
+        return GetAllTasksUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideGetIncompleteTasksUseCase(toDoRepository: ToDoRepository): GetIncompleteTasksUsesCase {
+        return GetIncompleteTasksUsesCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideGetCompletedTasksUseCase(toDoRepository: ToDoRepository): GetCompletedTasksUseCase {
+        return GetCompletedTasksUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideUpdateTaskUseCase(toDoRepository: ToDoRepository): UpdateTaskUseCase {
+        return UpdateTaskUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideDeleteTaskUseCase(toDoRepository: ToDoRepository): DeleteTaskUseCase {
+        return DeleteTaskUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideGetTaskByIdUseCase(toDoRepository: ToDoRepository): GetTaskByIdUseCase {
+        return GetTaskByIdUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideUpdateTaskStatusByIdUseCase(toDoRepository: ToDoRepository): UpdateTaskStatusUseCase {
+        return UpdateTaskStatusUseCase(toDoRepository)
+    }
 
 
 }

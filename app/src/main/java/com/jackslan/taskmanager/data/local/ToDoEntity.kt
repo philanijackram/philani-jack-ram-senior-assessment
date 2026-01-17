@@ -5,9 +5,9 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity
-data class ToDoEntity(
+data class TaskEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "title") val firstName: String?,
-    @ColumnInfo(name = "description") val lastName: String?,
+    @ColumnInfo(name = "title") val title: String?,
+    @ColumnInfo(name = "description") val description: String?,
     @ColumnInfo(name = "isCompleted") val isCompleted: Boolean
 )

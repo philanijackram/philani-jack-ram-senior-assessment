@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.jackslan.taskmanager.R
-import com.jackslan.taskmanager.domain.model.TodoItem
+import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
 import com.jackslan.taskmanager.presentation.components.FilterPills
 import com.jackslan.taskmanager.presentation.components.TaskItemCard
@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    todoList: List<TodoItem> = dummyTodoList
+    todoList: List<TaskItem> = dummyTodoList
 ) {
 
     val sheetState = rememberModalBottomSheetState()
