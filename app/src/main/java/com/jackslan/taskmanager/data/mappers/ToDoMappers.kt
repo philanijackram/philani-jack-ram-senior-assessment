@@ -14,7 +14,8 @@ fun TaskItem.toEntity(): TaskEntity {
 fun TaskEntity.toDomain(): TaskItem {
     return TaskItem(
         id = id,
-        title = title ?: "",
-        description = description
+        title = title?: "",
+        description = description,
+        isCompleted = isCompleted
     )
 }

@@ -12,6 +12,7 @@ import javax.inject.Inject
 class ToDoRepositoryImpl @Inject constructor(
     private val toDoDao: ToDoDao
 ) : ToDoRepository {
+
     override suspend fun getAllTasks(): Flow<List<TaskItem>> {
         return toDoDao.getAllTasks().map { taskList ->
             taskList.map { taskEntity -> taskEntity.toDomain() }

@@ -1,7 +1,7 @@
 package com.jackslan.taskmanager.domain.model
 
 data class TaskItem(
-    val id: Int,
+    val id: Int = 0,
     val title: String,
     val description: String?,
     val isCompleted: Boolean = false

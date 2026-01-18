@@ -16,4 +16,6 @@
     <string name="check_indicator">Check indicator</string>
     <string name="completed">Completed</string>
     <string name="update">Update</string>
+    <string name="app_db">app_db</string>
+    <string name="delete_icon">Delete icon</string>
 </resources>

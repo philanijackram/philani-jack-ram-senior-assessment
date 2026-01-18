@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,7 +32,7 @@ fun TaskItemCard(
     taskItem: TaskItem = dummyTodoList[0],
     onCheckedChange: (Int) -> Unit = {},
     onItemClick: (TaskItem) -> Unit = {},
-    onDeleteClick: (Int) -> Unit = {}
+    onDeleteClick: (TaskItem) -> Unit = {}
 ) {
     Card(
         modifier = Modifier
@@ -59,7 +60,7 @@ fun TaskItemCard(
                             R.drawable.unchecked_icon
                         }
                     ),
-                    contentDescription = "Check indicator",
+                    contentDescription = stringResource(R.string.check_indicator),
                     modifier = Modifier
                         .padding(end = 16.dp)
                         .clickable {
@@ -87,12 +88,14 @@ fun TaskItemCard(
             }
 
             IconButton(
-                modifier = Modifier.padding(16.dp).weight(0.2f),
-                onClick = { onDeleteClick(taskItem.id) }
+                modifier = Modifier
+                    .padding(16.dp)
+                    .weight(0.2f),
+                onClick = { onDeleteClick(taskItem) }
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Delete icon"
+                    contentDescription = stringResource(R.string.delete_icon)
                 )
             }
         }

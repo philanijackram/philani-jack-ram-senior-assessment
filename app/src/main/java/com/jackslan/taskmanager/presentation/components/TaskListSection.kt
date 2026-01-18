@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
-import com.jackslan.taskmanager.presentation.components.TaskItemCard
 
 @Composable
 fun TaskListSection(
@@ -15,7 +14,7 @@ fun TaskListSection(
     todoList: List<TaskItem> = dummyTodoList,
     onItemClick: (TaskItem) -> Unit = {},
     onCheckedChange: (Int) -> Unit = {},
-    onDeleteClick: (Int) -> Unit = {}
+    onDeleteClick: (TaskItem) -> Unit = {}
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize()
@@ -26,7 +25,6 @@ fun TaskListSection(
                 onCheckedChange = onCheckedChange,
                 onItemClick = onItemClick,
                 onDeleteClick = onDeleteClick
-
             )
         }
     }

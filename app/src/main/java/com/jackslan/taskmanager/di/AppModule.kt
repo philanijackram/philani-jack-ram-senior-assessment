@@ -2,11 +2,13 @@ package com.jackslan.taskmanager.di
 
 import android.content.Context
 import androidx.room.Room
+import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.data.local.AppDatabase
 import com.jackslan.taskmanager.data.local.ToDoDao
 import com.jackslan.taskmanager.data.remote.api.WeatherApiService
 import com.jackslan.taskmanager.data.repository.ToDoRepositoryImpl
 import com.jackslan.taskmanager.domain.repository.ToDoRepository
+import com.jackslan.taskmanager.domain.use_case.CreateNewTaskUseCase
 import com.jackslan.taskmanager.domain.use_case.DeleteTaskUseCase
 import com.jackslan.taskmanager.domain.use_case.GetAllTasksUseCase
 import com.jackslan.taskmanager.domain.use_case.GetCompletedTasksUseCase
@@ -46,7 +48,7 @@ class AppModule {
         return Room.databaseBuilder(
             context,
             AppDatabase::class.java,
-            "app_db"
+            context.getString(R.string.app_db)
         ).build()
     }
 
@@ -61,8 +63,13 @@ class AppModule {
     //Use Cases
 
     @Provides
-    fun provideCreateNewTaskUseCase(toDoRepository: ToDoRepository): GetAllTasksUseCase {
-        return GetAllTasksUseCase(toDoRepository)
+    fun provideCreateNewTaskUseCase(toDoRepository: ToDoRepository): CreateNewTaskUseCase {
+        return CreateNewTaskUseCase(toDoRepository)
+    }
+
+    @Provides
+    fun provideGetTaskByIdUseCase(toDoRepository: ToDoRepository): GetTaskByIdUseCase {
+        return GetTaskByIdUseCase(toDoRepository)
     }
 
     @Provides
@@ -88,11 +95,6 @@ class AppModule {
     @Provides
     fun provideDeleteTaskUseCase(toDoRepository: ToDoRepository): DeleteTaskUseCase {
         return DeleteTaskUseCase(toDoRepository)
-    }
-
-    @Provides
-    fun provideGetTaskByIdUseCase(toDoRepository: ToDoRepository): GetTaskByIdUseCase {
-        return GetTaskByIdUseCase(toDoRepository)
     }
 
     @Provides

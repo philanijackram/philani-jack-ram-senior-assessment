@@ -16,10 +16,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -29,10 +25,10 @@ import androidx.compose.ui.unit.dp
 @Preview(showBackground = true)
 @Composable
 fun FilterPills(
-    modifier: Modifier = Modifier,
+    selectedOption: String = "ALL",
+    onFilterChange: (String) -> Unit = {},
     filterOptions: List<String> = listOf("ALL", "TO DO", "COMPLETED")
 ) {
-    var selectedOption by remember { mutableStateOf(filterOptions[0]) }
 
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
@@ -46,7 +42,7 @@ fun FilterPills(
                     .padding(4.dp)
                     .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
                     .shadow(4.dp, RoundedCornerShape(16.dp))
-                    .clickable { selectedOption = filterOption },
+                    .clickable { onFilterChange(filterOption) },
                 colors = CardDefaults.cardColors(
                     containerColor = if (isSelected) {
                         if (!isSystemInDarkTheme()) Color(0xFF5E5D5D) else Color(0xFFFDFDFD)
@@ -70,14 +66,10 @@ fun FilterPills(
                     Text(
                         text = filterOption,
                         style = MaterialTheme.typography.bodyMedium
-
                     )
                 }
             }
-
-
         }
-
     }
 
 }
