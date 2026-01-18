@@ -16,11 +16,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 
 @Preview(showBackground = true)
 @Composable
-fun HomeItemCard(
+fun SettingsItemCard(
     icon: Int = R.drawable.unchecked_icon,
     title: String = "To Do",
     onClick: () -> Unit = {}
@@ -46,6 +47,7 @@ fun HomeItemCard(
 
             Text(
                 text = title,
+                style= Typography.bodyMedium,
                 modifier = Modifier.padding(start = 16.dp)
             )
 

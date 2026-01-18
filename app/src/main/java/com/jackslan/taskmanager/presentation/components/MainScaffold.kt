@@ -16,7 +16,6 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -24,11 +23,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
-
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Composable
 fun MainScaffold(
@@ -74,8 +72,7 @@ fun MainScaffold(
 
                 Text(
                     text = title,
-                    style = typography.titleLarge,
-                    fontWeight = FontWeight.Bold
+                    style = Typography.titleLarge
                 )
 
                 if (showSettings) {
@@ -91,7 +88,6 @@ fun MainScaffold(
                 } else {
                     Spacer(modifier = Modifier.size(24.dp))
                 }
-
             }
         },
         floatingActionButton = {

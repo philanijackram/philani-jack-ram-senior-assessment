@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Composable
 fun TaskItemCard(
@@ -72,6 +73,7 @@ fun TaskItemCard(
                     modifier = Modifier.weight(1f)
                 ) {
                     Text(
+                        style = Typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         text = taskItem.title
                     )
@@ -80,6 +82,7 @@ fun TaskItemCard(
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
+                            style = Typography.bodyMedium,
                             fontWeight = FontWeight.Light,
                             text = description,
                         )

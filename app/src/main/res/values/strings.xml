@@ -18,4 +18,8 @@
     <string name="update">Update</string>
     <string name="app_db">app_db</string>
     <string name="delete_icon">Delete icon</string>
+    <string name="time_placeholder_">--:--</string>
+    <string name="textfield_placeholder">--</string>
+    <string name="dark_light_mode_toggle">dark light mode toggle</string>
+    <string name="back_icon">back icon</string>
 </resources>

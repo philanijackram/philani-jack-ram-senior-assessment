@@ -12,10 +12,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
 import java.util.Locale
 
@@ -54,16 +54,16 @@ fun AstroCard(
             )
 
             Text(
+                style = Typography.bodyMedium,
                 modifier = Modifier.padding(vertical = 4.dp),
                 text = astroType.name.lowercase(Locale.ROOT)
                     .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
             )
 
             Text(
-                text = time
+                text = time,
+                style = Typography.bodyMedium,
             )
-
-
         }
     }
 }

@@ -30,6 +30,7 @@ import androidx.compose.ui.window.Dialog
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
 @Composable
@@ -40,7 +41,7 @@ fun ViewEditTaskDialog(
     onUpdateClick: () -> Unit = {}
 ) {
 
-    Dialog(onDismissRequest = { onDismissRequest() }) {
+    Dialog(onDismissRequest = { }) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -88,6 +89,7 @@ fun ViewEditTaskDialog(
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
+                        style = Typography.bodyMedium,
                         text = stringResource(R.string.completed),
                         modifier = Modifier
                     )
@@ -131,7 +133,10 @@ fun ViewEditTaskDialog(
                             onUpdateClick()
                             onDismissRequest()
                         }) {
-                        Text(stringResource(R.string.update))
+                        Text(
+                            text = stringResource(R.string.update),
+                            style = Typography.bodyMedium
+                        )
                     }
 
                     Button(
@@ -143,7 +148,10 @@ fun ViewEditTaskDialog(
                         onClick = {
                             onDismissRequest()
                         }) {
-                        Text(text = stringResource(R.string.cancel))
+                        Text(
+                            text = stringResource(R.string.cancel),
+                            style = Typography.bodyMedium
+                        )
                     }
                 }
             }

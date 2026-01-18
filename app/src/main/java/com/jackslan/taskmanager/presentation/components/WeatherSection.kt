@@ -7,21 +7,20 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.WeatherItem
 import com.jackslan.taskmanager.domain.model.dummyWeatherData
+import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
 import com.jackslan.taskmanager.utils.DateUtils
-import java.time.LocalDate
-import java.util.Date
-import kotlin.time.Duration.Companion.days
 
 @Composable
 fun WeatherSection(
@@ -41,31 +40,43 @@ fun WeatherSection(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column() {
+            Column {
                 Text(
                     text = DateUtils.getTodayDay(),
-                    style = typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
+                    style = Typography.titleLarge
                 )
-                Text(text = DateUtils.getTodayDate(), modifier = Modifier.padding(vertical = 8.dp))
-                Text(weatherItem?.location ?: "")
+
+                Text(
+                    text = DateUtils.getTodayDate(),
+                    style = Typography.bodyLarge,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+
+                Text(
+                    text = weatherItem?.location ?: "",
+                    style = Typography.bodyLarge
+                )
+
             }
+
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Bottom
             ) {
                 Text(
-                    text = if (weatherItem?.temperature != null) " ${weatherItem.temperature}" else "--",
-                    style = typography.headlineMedium,
+                    text = if (weatherItem?.temperature != null) " ${weatherItem.temperature}" else stringResource(
+                        R.string.textfield_placeholder
+                    ),
+                    style = Typography.titleLarge,
                     fontWeight = FontWeight.Bold
                 )
+
                 Text(
-                    text = weatherItem?.currentWeather ?: "--",
-                    style = typography.headlineSmall,
-                    fontWeight = FontWeight.Bold
+                    text = weatherItem?.currentWeather
+                        ?: stringResource(R.string.textfield_placeholder),
+                    style = Typography.bodyLarge,
                 )
             }
-
         }
         Row(
             modifier = Modifier
@@ -75,17 +86,16 @@ fun WeatherSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-
             AstroCard(
                 modifier = Modifier.weight(1f),
                 astroType = AstroType.SUNRISE,
-                time = weatherItem?.sunrise ?: "--:--"
+                time = weatherItem?.sunrise ?: stringResource(R.string.time_placeholder_)
 
             )
             AstroCard(
                 modifier = Modifier.weight(1f),
                 astroType = AstroType.SUNSET,
-                time = weatherItem?.sunset ?: "--:--"
+                time = weatherItem?.sunset ?: stringResource(R.string.time_placeholder_)
             )
         }
     }

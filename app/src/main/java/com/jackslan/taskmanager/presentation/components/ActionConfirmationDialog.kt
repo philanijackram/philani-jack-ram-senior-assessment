@@ -11,17 +11,16 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
 @Composable
@@ -40,7 +39,7 @@ fun ActionConfirmationDialog(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(200.dp)
-                .padding(vertical =  16.dp, horizontal = 8.dp),
+                .padding(vertical = 16.dp, horizontal = 8.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
 
@@ -50,14 +49,13 @@ fun ActionConfirmationDialog(
                 verticalArrangement = Arrangement.Center
             ) {
                 Text(
-                    style = typography.titleMedium,
-                    fontWeight = FontWeight.Bold,
+                    style = Typography.titleMedium,
                     text = title,
                     textAlign = TextAlign.Center,
                 )
 
                 Text(
-                    style = typography.bodyMedium,
+                    style = Typography.bodyMedium,
                     modifier = Modifier
                         .padding(8.dp),
                     text = message,
@@ -83,7 +81,11 @@ fun ActionConfirmationDialog(
                             onPositiveClick()
                             onDismissRequest()
                         }) {
-                        Text(positiveButtonText)
+
+                        Text(
+                            text = positiveButtonText,
+                            style = Typography.bodyMedium
+                        )
                     }
 
                     Button(
@@ -96,11 +98,13 @@ fun ActionConfirmationDialog(
                             onNegativeClick()
                             onDismissRequest()
                         }) {
-                        Text(negativeButtonText)
+                        Text(
+                            text = negativeButtonText,
+                            style=Typography.bodyMedium
+                        )
                     }
                 }
             }
-
         }
     }
 }

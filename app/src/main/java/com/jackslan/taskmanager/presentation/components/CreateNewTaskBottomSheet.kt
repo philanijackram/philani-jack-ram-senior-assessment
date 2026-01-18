@@ -8,20 +8,18 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
@@ -48,27 +46,32 @@ fun CreateNewTaskBottomSheet(
         ) {
             Text(
                 text = stringResource(R.string.create_new_task),
-                style = typography.titleLarge,
-                fontWeight = FontWeight.Bold,
+                style = Typography.titleLarge,
                 modifier = Modifier.padding(8.dp)
             )
 
             OutlinedTextField(
+                textStyle = Typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
                 value = title,
                 onValueChange = onTitleChange,
-                label = { Text(stringResource(R.string.title)) }
+                label = {
+                    Text(stringResource(R.string.title))
+                }
             )
 
             OutlinedTextField(
+                textStyle = Typography.bodyMedium,
                 value = description,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
                 onValueChange = onDescriptionChange,
-                label = { Text(stringResource(R.string.description)) }
+                label = {
+                    Text(stringResource(R.string.description))
+                }
             )
 
             Row(
@@ -89,9 +92,11 @@ fun CreateNewTaskBottomSheet(
                     onClick = {
                         onConfirm()
                     }) {
-                    Text(stringResource(R.string.create))
+                    Text(
+                        text = stringResource(R.string.create),
+                        style = Typography.bodyMedium
+                    )
                 }
-
 
                 Button(
                     colors = ButtonDefaults.buttonColors(
@@ -102,7 +107,10 @@ fun CreateNewTaskBottomSheet(
                     onClick = {
                         onDismiss()
                     }) {
-                    Text(stringResource(R.string.cancel))
+                    Text(
+                        text = stringResource(R.string.cancel),
+                        style = Typography.bodyMedium
+                    )
                 }
             }
         }
