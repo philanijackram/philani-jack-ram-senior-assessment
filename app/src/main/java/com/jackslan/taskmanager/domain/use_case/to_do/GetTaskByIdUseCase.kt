@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.domain.use_case
+package com.jackslan.taskmanager.domain.use_case.to_do
 
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.repository.ToDoRepository

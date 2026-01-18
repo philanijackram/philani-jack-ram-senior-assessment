@@ -5,17 +5,20 @@ import androidx.room.Room
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.data.local.AppDatabase
 import com.jackslan.taskmanager.data.local.ToDoDao
-import com.jackslan.taskmanager.data.remote.api.WeatherApiService
+import com.jackslan.taskmanager.data.remote.api.ApiService
 import com.jackslan.taskmanager.data.repository.ToDoRepositoryImpl
+import com.jackslan.taskmanager.data.repository.WeatherRepositoryImpl
 import com.jackslan.taskmanager.domain.repository.ToDoRepository
-import com.jackslan.taskmanager.domain.use_case.CreateNewTaskUseCase
-import com.jackslan.taskmanager.domain.use_case.DeleteTaskUseCase
-import com.jackslan.taskmanager.domain.use_case.GetAllTasksUseCase
-import com.jackslan.taskmanager.domain.use_case.GetCompletedTasksUseCase
-import com.jackslan.taskmanager.domain.use_case.GetIncompleteTasksUsesCase
-import com.jackslan.taskmanager.domain.use_case.GetTaskByIdUseCase
-import com.jackslan.taskmanager.domain.use_case.UpdateTaskStatusUseCase
-import com.jackslan.taskmanager.domain.use_case.UpdateTaskUseCase
+import com.jackslan.taskmanager.domain.repository.WeatherRepository
+import com.jackslan.taskmanager.domain.use_case.to_do.CreateNewTaskUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.DeleteTaskUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.GetAllTasksUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.GetCompletedTasksUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.GetIncompleteTasksUsesCase
+import com.jackslan.taskmanager.domain.use_case.to_do.GetTaskByIdUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.UpdateTaskStatusUseCase
+import com.jackslan.taskmanager.domain.use_case.to_do.UpdateTaskUseCase
+import com.jackslan.taskmanager.domain.use_case.weather.GetWeatherDataUseCase
 import com.jackslan.taskmanager.utils.ImportantStrings
 import dagger.Module
 import dagger.Provides
@@ -39,8 +42,8 @@ class AppModule {
     }
 
     @Provides
-    fun provideWeatherApiService(retrofit: Retrofit): WeatherApiService {
-        return retrofit.create(WeatherApiService::class.java)
+    fun provideWeatherApiService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
     @Provides
@@ -58,6 +61,11 @@ class AppModule {
     @Provides
     fun provideToDoRepository(toDoDao: ToDoDao): ToDoRepository {
         return ToDoRepositoryImpl(toDoDao)
+    }
+
+    @Provides
+    fun provideWeatherRepository(apiService: ApiService): WeatherRepository {
+        return WeatherRepositoryImpl(apiService)
     }
 
     //Use Cases
@@ -102,5 +110,9 @@ class AppModule {
         return UpdateTaskStatusUseCase(toDoRepository)
     }
 
+    @Provides
+    fun provideGetWeatherDataUseCase(weatherRepository: WeatherRepository): GetWeatherDataUseCase {
+        return GetWeatherDataUseCase(weatherRepository)
+    }
 
 }

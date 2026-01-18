@@ -18,11 +18,15 @@ import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.domain.model.WeatherItem
 import com.jackslan.taskmanager.domain.model.dummyWeatherData
 import com.jackslan.taskmanager.utils.AstroType
+import com.jackslan.taskmanager.utils.DateUtils
+import java.time.LocalDate
+import java.util.Date
+import kotlin.time.Duration.Companion.days
 
 @Composable
 fun WeatherSection(
     modifier: Modifier = Modifier,
-    weatherItem: WeatherItem = dummyWeatherData
+    weatherItem: WeatherItem? = dummyWeatherData
 ) {
     Card(
         modifier = Modifier
@@ -38,17 +42,29 @@ fun WeatherSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column() {
-                Text(text = "Friday", fontWeight = FontWeight.Bold)
-                Text(text = "16 Jan 26", modifier = Modifier.padding(vertical = 8.dp))
-                Text("Johannesburg")
+                Text(
+                    text = DateUtils.getTodayDay(),
+                    style = typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(text = DateUtils.getTodayDate(), modifier = Modifier.padding(vertical = 8.dp))
+                Text(weatherItem?.location ?: "")
             }
-
-            Text(
-                text = weatherItem.currentWeather,
-                modifier = Modifier.padding(16.dp),
-                style = typography.headlineMedium,
-                fontWeight = FontWeight.Bold
-            )
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Bottom
+            ) {
+                Text(
+                    text = if (weatherItem?.temperature != null) " ${weatherItem.temperature}" else "--",
+                    style = typography.headlineMedium,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = weatherItem?.currentWeather ?: "--",
+                    style = typography.headlineSmall,
+                    fontWeight = FontWeight.Bold
+                )
+            }
 
         }
         Row(
@@ -63,13 +79,13 @@ fun WeatherSection(
             AstroCard(
                 modifier = Modifier.weight(1f),
                 astroType = AstroType.SUNRISE,
-                time = weatherItem.astroItem.sunrise
+                time = weatherItem?.sunrise ?: "--:--"
 
             )
             AstroCard(
                 modifier = Modifier.weight(1f),
                 astroType = AstroType.SUNSET,
-                time = weatherItem.astroItem.sunset
+                time = weatherItem?.sunset ?: "--:--"
             )
         }
     }

@@ -1,4 +1,31 @@
 package com.jackslan.taskmanager.data.repository
 
-class WeatherRepositoryImpl {
+import android.util.Log
+import com.jackslan.taskmanager.data.remote.api.ApiService
+import com.jackslan.taskmanager.data.remote.model.WeatherResponse
+import com.jackslan.taskmanager.domain.repository.WeatherRepository
+import com.jackslan.taskmanager.utils.ImportantStrings
+import javax.inject.Inject
+
+class WeatherRepositoryImpl @Inject constructor(
+    private val apiService: ApiService
+) : WeatherRepository {
+    override suspend fun getWeatherData(
+        latitude: Double,
+        longitude: Double,
+        days: Int,
+    ): WeatherResponse {
+        val response = apiService.getWeatherData(
+            "${latitude},${longitude}",
+            days,
+            ImportantStrings.WEATHER_API_KEY
+        )
+        if (response.isSuccessful) {
+            Log.d("WeatherRepository", "Weather data fetched successfully ${response.body()}")
+            return response.body()!!
+        } else {
+            throw Exception("Failed to fetch weather data")
+        }
+
+    }
 }

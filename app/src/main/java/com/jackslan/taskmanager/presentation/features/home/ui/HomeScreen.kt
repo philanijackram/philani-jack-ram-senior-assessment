@@ -51,7 +51,8 @@ fun HomeScreen(
         viewModel.effect.collect { effect ->
             when (effect) {
                 is HomeEffect.LoadTasks -> {
-                    viewModel.fetchTasks()
+                    //viewModel.fetchTasks()
+                    viewModel.getWeatherData()
                 }
 
                 is HomeEffect.ShowCreateTaskBottomSheet -> {
@@ -90,7 +91,9 @@ fun HomeScreen(
             modifier = Modifier.padding(top = 60.dp)
         ) {
 
-            WeatherSection()
+            WeatherSection(
+                weatherItem = viewModel.weatherUiState.weatherData
+            )
 
             FilterPills(
                 selectedOption = uiState.selectedFilter,
