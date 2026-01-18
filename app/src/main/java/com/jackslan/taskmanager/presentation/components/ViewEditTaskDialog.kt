@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -45,115 +46,119 @@ fun ViewEditTaskDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(350.dp)
+                .height(400.dp)
                 .padding(vertical = 16.dp, horizontal = 8.dp),
             shape = RoundedCornerShape(16.dp),
         ) {
-            Column(
+            LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
-
             ) {
 
-                OutlinedTextField(
-                    value = taskItem.title,
-                    onValueChange = {
-                        onTaskChange(taskItem.copy(title = it))
-                    },
-                    colors = TextFieldDefaults.colors(
-                        disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                item {
+                    OutlinedTextField(
+                        value = taskItem.title,
+                        onValueChange = {
+                            onTaskChange(taskItem.copy(title = it))
+                        },
+                        colors = TextFieldDefaults.colors(
+                            disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                        )
                     )
-                )
-
-                OutlinedTextField(
-                    maxLines = 4,
-                    minLines = 4,
-                    value = taskItem.description ?: "",
-                    onValueChange = {
-                        onTaskChange(taskItem.copy(description = it))
-                    },
-                    modifier = Modifier.padding(vertical = 8.dp),
-                    colors = TextFieldDefaults.colors(
-                        disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                }
+                item {
+                    OutlinedTextField(
+                        maxLines = 3,
+                        minLines = 3,
+                        value = taskItem.description ?: "",
+                        onValueChange = {
+                            onTaskChange(taskItem.copy(description = it))
+                        },
+                        modifier = Modifier.padding(vertical = 8.dp),
+                        colors = TextFieldDefaults.colors(
+                            disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                        )
                     )
-
-                )
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    Text(
-                        style = Typography.bodyMedium,
-                        text = stringResource(R.string.completed),
+                }
+                item {
+                    Row(
                         modifier = Modifier
-                    )
-
-                    IconButton(
-                        modifier = Modifier.wrapContentSize(),
-                        onClick = {
-                            onTaskChange(taskItem.copy(isCompleted = !taskItem.isCompleted))
-                        }
+                            .fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Icon(
-                            painter = painterResource(
-                                if (taskItem.isCompleted) {
-                                    R.drawable.checked_icon
-                                } else {
-                                    R.drawable.unchecked_icon
-                                }
-                            ),
-                            contentDescription = stringResource(R.string.check_indicator),
+                        Text(
+                            style = Typography.bodyMedium,
+                            text = stringResource(R.string.completed),
+                            modifier = Modifier
+                        )
 
-                            )
+                        IconButton(
+                            modifier = Modifier.wrapContentSize(),
+                            onClick = {
+                                onTaskChange(taskItem.copy(isCompleted = !taskItem.isCompleted))
+                            }
+                        ) {
+                            Icon(
+                                painter = painterResource(
+                                    if (taskItem.isCompleted) {
+                                        R.drawable.checked_icon
+                                    } else {
+                                        R.drawable.unchecked_icon
+                                    }
+                                ),
+                                contentDescription = stringResource(R.string.check_indicator),
+
+                                )
+                        }
                     }
                 }
-
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-
-                    Button(
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Green,
-                            contentColor = Color.Black
-                        ),
+                item {
+                    Row(
                         modifier = Modifier
-                            .weight(1f)
-                            .padding(end = 8.dp),
-                        onClick = {
-                            onUpdateClick()
-                            onDismissRequest()
-                        }) {
-                        Text(
-                            text = stringResource(R.string.update),
-                            style = Typography.bodyMedium
-                        )
-                    }
+                            .fillMaxWidth()
+                            .padding(vertical = 8.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
 
-                    Button(
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Red,
-                            contentColor = Color.White
-                        ),
-                        modifier = Modifier.weight(1f),
-                        onClick = {
-                            onDismissRequest()
-                        }) {
-                        Text(
-                            text = stringResource(R.string.cancel),
-                            style = Typography.bodyMedium
-                        )
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Green,
+                                contentColor = Color.Black
+                            ),
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(end = 8.dp),
+                            onClick = {
+                                onUpdateClick()
+                                onDismissRequest()
+                            }) {
+                            Text(
+                                text = stringResource(R.string.update),
+                                style = Typography.bodyMedium
+                            )
+                        }
+
+                        Button(
+                            colors = ButtonDefaults.buttonColors(
+                                containerColor = Color.Red,
+                                contentColor = Color.White
+                            ),
+                            modifier = Modifier.weight(1f),
+                            onClick = {
+                                onDismissRequest()
+                            }) {
+                            Text(
+                                text = stringResource(R.string.cancel),
+                                style = Typography.bodyMedium
+                            )
+                        }
                     }
                 }
+
             }
         }
     }
