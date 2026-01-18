@@ -131,10 +131,10 @@ class HomeViewModel @Inject constructor(
         when (event) {
             is HomeEvent.LoadTasks -> getAllTasks()
             is HomeEvent.OnDeleteClick -> deleteTask(taskId = event.taskId)
-            is HomeEvent.OnCheckChecked -> updateTaskStatus(taskId = event.taskId)
+            is HomeEvent.OnCheckChanged -> updateTaskStatus(taskId = event.taskId)
             is HomeEvent.OnTaskClick -> updateTask(event.taskItem)
-            is HomeEvent.OnAddClick -> {
-                emitEffect(HomeEffect.ShowCreateTaskBottomSheet)
+            is HomeEvent.OnFabClick -> {
+
             }
             is HomeEvent.OnFilterChange -> onFilterChange(event.filter)
             is HomeEvent.OnCreateTaskClick -> createNewTask(event.title, event.description)

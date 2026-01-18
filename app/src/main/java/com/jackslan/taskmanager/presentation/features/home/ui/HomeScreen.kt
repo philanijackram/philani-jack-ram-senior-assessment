@@ -107,7 +107,7 @@ fun HomeScreen(
                     currentItem = it
                 },
                 onCheckedChange = { taskId ->
-                    viewModel.onEvent(HomeEvent.OnCheckChecked(taskId))
+                    viewModel.onEvent(HomeEvent.OnCheckChanged(taskId))
                 },
                 onDeleteClick = { taskItem ->
                     showDeleteConfirmationDialog = true
