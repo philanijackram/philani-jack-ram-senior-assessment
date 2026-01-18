@@ -36,7 +36,8 @@ import com.jackslan.taskmanager.domain.model.dummyTodoList
 fun ViewEditTaskDialog(
     onDismissRequest: () -> Unit = {},
     taskItem: TaskItem = dummyTodoList[0],
-    onEditClick: () -> Unit = {}
+    onTaskChange: (TaskItem) -> Unit = {},
+    onUpdateClick: () -> Unit = {}
 ) {
 
     Dialog(onDismissRequest = { onDismissRequest() }) {
@@ -55,14 +56,12 @@ fun ViewEditTaskDialog(
                 verticalArrangement = Arrangement.Center
 
             ) {
-//                Text(
-//                    text = taskItem.title,
-//                    textAlign = TextAlign.Center,
-//                )
 
                 OutlinedTextField(
                     value = taskItem.title,
-                    onValueChange = {},
+                    onValueChange = {
+                        onTaskChange(taskItem.copy(title = it))
+                    },
                     colors = TextFieldDefaults.colors(
                         disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
                     )
@@ -72,7 +71,9 @@ fun ViewEditTaskDialog(
                     maxLines = 4,
                     minLines = 4,
                     value = taskItem.description ?: "",
-                    onValueChange = {},
+                    onValueChange = {
+                        onTaskChange(taskItem.copy(description = it))
+                    },
                     modifier = Modifier.padding(vertical = 8.dp),
                     colors = TextFieldDefaults.colors(
                         disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
@@ -93,7 +94,9 @@ fun ViewEditTaskDialog(
 
                     IconButton(
                         modifier = Modifier.wrapContentSize(),
-                        onClick = { }
+                        onClick = {
+                            onTaskChange(taskItem.copy(isCompleted = !taskItem.isCompleted))
+                        }
                     ) {
                         Icon(
                             painter = painterResource(
@@ -125,7 +128,7 @@ fun ViewEditTaskDialog(
                             .weight(1f)
                             .padding(end = 8.dp),
                         onClick = {
-                            onEditClick()
+                            onUpdateClick()
                             onDismissRequest()
                         }) {
                         Text(stringResource(R.string.update))
@@ -143,10 +146,7 @@ fun ViewEditTaskDialog(
                         Text(text = stringResource(R.string.cancel))
                     }
                 }
-
             }
-
-
         }
     }
 }

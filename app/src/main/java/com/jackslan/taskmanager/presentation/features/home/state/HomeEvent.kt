@@ -12,4 +12,5 @@ sealed class HomeEvent {
     data class OnFilterChange(val filter: String) : HomeEvent()
     data class OnTitleChange(val title: String) : HomeEvent()
     data class OnDescriptionChange(val description: String) : HomeEvent()
+    data class OnUpdateClick(val taskItem: TaskItem) : HomeEvent()
 }

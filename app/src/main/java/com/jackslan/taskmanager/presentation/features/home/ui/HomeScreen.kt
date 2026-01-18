@@ -158,8 +158,16 @@ fun HomeScreen(
             if (showTaskDetailsDialog) {
                 currentItem?.let { item ->
                     ViewEditTaskDialog(
-                        onDismissRequest = { showTaskDetailsDialog = false },
-                        taskItem = item
+                        onDismissRequest = {
+                            showTaskDetailsDialog = false
+                        },
+                        taskItem = item,
+                        onTaskChange = { taskItem ->
+                            currentItem = taskItem
+                        },
+                        onUpdateClick = {
+                            viewModel.onEvent(HomeEvent.OnUpdateClick(currentItem!!))
+                        }
                     )
                 }
 

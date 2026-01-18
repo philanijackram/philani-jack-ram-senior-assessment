@@ -5,6 +5,7 @@ import com.jackslan.taskmanager.domain.model.TaskItem
 
 fun TaskItem.toEntity(): TaskEntity {
     return TaskEntity(
+        id = id,
         title = title,
         description = description,
         isCompleted = isCompleted

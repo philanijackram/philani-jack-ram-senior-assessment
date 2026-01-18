@@ -131,6 +131,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             uiState = uiState.copy(isLoading = true)
             updateTaskUseCase(taskItem)
+            fetchTasks()
             uiState = uiState.copy(isLoading = false)
         }
     }
@@ -152,13 +153,11 @@ class HomeViewModel @Inject constructor(
                 getAllTasks()
                 getWeatherData()
             }
-
+            is HomeEvent.OnUpdateClick -> updateTask(event.taskItem)
             is HomeEvent.OnDeleteClick -> deleteTask(taskId = event.taskId)
             is HomeEvent.OnCheckChanged -> updateTaskStatus(taskId = event.taskId)
             is HomeEvent.OnTaskClick -> updateTask(event.taskItem)
-            is HomeEvent.OnFabClick -> {
-
-            }
+            is HomeEvent.OnFabClick -> {}
             is HomeEvent.OnFilterChange -> onFilterChange(event.filter)
             is HomeEvent.OnCreateTaskClick -> createNewTask(event.title, event.description)
             is HomeEvent.OnTitleChange -> uiState = uiState.copy(title = event.title)
