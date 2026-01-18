@@ -8,13 +8,11 @@ class GetWeatherDataUseCase @Inject constructor(
     private val weatherRepository: WeatherRepository
 ) {
     suspend operator fun invoke(
-        latitude: Double,
-        longitude: Double,
+        coordinates: String,
         days: Int,
     ): WeatherResponse {
         return weatherRepository.getWeatherData(
-            latitude,
-            longitude,
+           coordinates,
             days,
         )
     }

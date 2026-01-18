@@ -18,6 +18,8 @@ navigation = "2.9.0"
 lifecycle-viewmodel = "2.9.1"
 compose-viewmodel = "2.9.1"
 
+play-location = "21.3.0"
+
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
@@ -47,6 +49,7 @@ compose-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-
 room-runtime = { group = "androidx.room", name = "room-runtime", version.ref = "room" }
 room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
+location-service = { group = "com.google.android.gms", name = "play-services-location", version.ref = "play-location" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

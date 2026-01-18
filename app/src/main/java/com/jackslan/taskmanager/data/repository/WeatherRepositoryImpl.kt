@@ -11,12 +11,11 @@ class WeatherRepositoryImpl @Inject constructor(
     private val apiService: ApiService
 ) : WeatherRepository {
     override suspend fun getWeatherData(
-        latitude: Double,
-        longitude: Double,
+        coordinates: String,
         days: Int,
     ): WeatherResponse {
         val response = apiService.getWeatherData(
-            "${latitude},${longitude}",
+            coordinates,
             days,
             ImportantStrings.WEATHER_API_KEY
         )

@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.jackslan.taskmanager.data.local.DataStoreManager
 import com.jackslan.taskmanager.data.mappers.toDomain
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.use_case.to_do.CreateNewTaskUseCase
@@ -26,6 +27,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
+    private val dataStoreManager: DataStoreManager,
     private val getWeatherDataUseCase: GetWeatherDataUseCase,
     private val createNewTaskUseCase: CreateNewTaskUseCase,
     private val getAllTasksUseCase: GetAllTasksUseCase,
@@ -50,16 +52,20 @@ class HomeViewModel @Inject constructor(
     }
 
     fun getWeatherData() {
-        viewModelScope.launch {
-            weatherUiState = weatherUiState.copy(isLoading = true)
-            val weatherData = getWeatherDataUseCase(
-                -25.988569399253187,
-                28.196503983404344,
-                1
-            )
 
-            weatherUiState =
-                weatherUiState.copy(weatherData = weatherData.toDomain(), isLoading = false)
+        weatherUiState = weatherUiState.copy(isLoading = true)
+        viewModelScope.launch {
+
+            dataStoreManager.locationFlow.collect { coordinates ->
+
+                val weatherData = getWeatherDataUseCase(
+                    coordinates = coordinates,
+                    1
+                )
+
+                weatherUiState =
+                    weatherUiState.copy(weatherData = weatherData.toDomain(), isLoading = false)
+            }
         }
     }
 
@@ -141,18 +147,13 @@ class HomeViewModel @Inject constructor(
         fetchTasks()
     }
 
-    private fun emitEffect(effect: HomeEffect) {
-        viewModelScope.launch {
-            _effect.emit(effect)
-        }
-    }
-
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.LoadTasks -> {
                 getAllTasks()
                 getWeatherData()
             }
+
             is HomeEvent.OnUpdateClick -> updateTask(event.taskItem)
             is HomeEvent.OnDeleteClick -> deleteTask(taskId = event.taskId)
             is HomeEvent.OnCheckChanged -> updateTaskStatus(taskId = event.taskId)

@@ -81,5 +81,10 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
+    //Location
+    implementation(libs.location.service)
+
+    //Data Store
+    implementation("androidx.datastore:datastore-preferences:1.2.0")
 
 }

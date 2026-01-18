@@ -5,8 +5,7 @@ import com.jackslan.taskmanager.data.remote.model.WeatherResponse
 interface WeatherRepository {
 
     suspend fun getWeatherData(
-        latitude: Double,
-        longitude: Double,
+        coordinates: String,
         days: Int,
     ): WeatherResponse
 

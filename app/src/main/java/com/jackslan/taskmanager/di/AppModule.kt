@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.data.local.AppDatabase
 import com.jackslan.taskmanager.data.local.ToDoDao
+import com.jackslan.taskmanager.data.local.DataStoreManager
 import com.jackslan.taskmanager.data.remote.api.ApiService
 import com.jackslan.taskmanager.data.repository.ToDoRepositoryImpl
 import com.jackslan.taskmanager.data.repository.WeatherRepositoryImpl
@@ -66,6 +67,12 @@ class AppModule {
     @Provides
     fun provideWeatherRepository(apiService: ApiService): WeatherRepository {
         return WeatherRepositoryImpl(apiService)
+    }
+
+    //Data Store
+    @Provides
+    fun provideUserManager(@ApplicationContext context: Context): DataStoreManager {
+        return DataStoreManager(context)
     }
 
     //Use Cases
