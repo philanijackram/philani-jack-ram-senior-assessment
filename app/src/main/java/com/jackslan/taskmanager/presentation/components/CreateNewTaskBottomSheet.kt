@@ -45,6 +45,7 @@ fun CreateNewTaskBottomSheet(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
+
             Text(
                 text = stringResource(R.string.create_new_task),
                 style = Typography.titleLarge,
@@ -58,11 +59,21 @@ fun CreateNewTaskBottomSheet(
                     .padding(8.dp),
                 value = title,
                 onValueChange = onTitleChange,
-                placeholder ={Text(text=stringResource(R.string.title), style = Typography.bodyMedium)},
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.title),
+                        style = Typography.bodyMedium
+                    )
+                },
             )
 
             OutlinedTextField(
-                placeholder ={Text(text=stringResource(R.string.description), style = Typography.bodyMedium)},
+                placeholder = {
+                    Text(
+                        text = stringResource(R.string.description),
+                        style = Typography.bodyMedium
+                    )
+                },
                 maxLines = 3,
                 textStyle = Typography.bodyMedium,
                 value = description,
@@ -84,7 +95,9 @@ fun CreateNewTaskBottomSheet(
                         containerColor = MaterialTheme.colorScheme.secondary,
                         contentColor = MaterialTheme.colorScheme.onSecondary
                     ),
-                    modifier = Modifier.weight(1f).padding(end = 8.dp),
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp),
                     border = BorderStroke(
                         width = 1.dp,
                         color = MaterialTheme.colorScheme.primary

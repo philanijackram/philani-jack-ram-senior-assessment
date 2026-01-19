@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.presentation.features.home.ui
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -12,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,6 +48,7 @@ fun HomeScreen(
     var currentItem by remember { mutableStateOf<TaskItem?>(null) }
 
     val uiState = viewModel.uiState
+    val context = LocalContext.current
 
     LaunchedEffect(key1 = true) {
         viewModel.effect.collect { effect ->
@@ -65,7 +68,11 @@ fun HomeScreen(
                 }
 
                 is HomeEffect.ShowError -> {
+                    Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+                }
 
+                is HomeEffect.ShowSuccess -> {
+                    Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
                 }
 
                 is HomeEffect.ShowDeleteConfirmationDialog -> {
@@ -138,19 +145,23 @@ fun HomeScreen(
                         viewModel.onEvent(HomeEvent.OnDescriptionChange(""))
                     },
                     onConfirm = {
-                        viewModel.onEvent(
-                            HomeEvent.OnCreateTaskClick(
-                                title = uiState.title,
-                                description = uiState.description
+                        if (uiState.title.isEmpty()) {
+                            viewModel.emitEffect(HomeEffect.ShowError("Title cannot be empty"))
+                        } else {
+                            viewModel.onEvent(
+                                HomeEvent.OnCreateTaskClick(
+                                    title = uiState.title,
+                                    description = uiState.description
+                                )
                             )
-                        )
-                        scope.launch { sheetState.hide() }.invokeOnCompletion {
-                            if (!sheetState.isVisible) {
-                                showCreateTaskBottomSheet = false
+                            scope.launch { sheetState.hide() }.invokeOnCompletion {
+                                if (!sheetState.isVisible) {
+                                    showCreateTaskBottomSheet = false
+                                }
                             }
+                            viewModel.onEvent(HomeEvent.OnTitleChange(""))
+                            viewModel.onEvent(HomeEvent.OnDescriptionChange(""))
                         }
-                        viewModel.onEvent(HomeEvent.OnTitleChange(""))
-                        viewModel.onEvent(HomeEvent.OnDescriptionChange(""))
                     },
                 )
             }

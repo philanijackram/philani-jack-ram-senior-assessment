@@ -172,4 +172,10 @@ class HomeViewModel @Inject constructor(
 
     }
 
+    fun emitEffect(effect: HomeEffect) {
+        viewModelScope.launch {
+            _effect.emit(effect)
+        }
+    }
+
 }

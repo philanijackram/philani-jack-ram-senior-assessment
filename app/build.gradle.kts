@@ -85,6 +85,6 @@ dependencies {
     implementation(libs.location.service)
 
     //Data Store
-    implementation("androidx.datastore:datastore-preferences:1.2.0")
+    implementation(libs.androidx.datastore.preferences)
 
 }

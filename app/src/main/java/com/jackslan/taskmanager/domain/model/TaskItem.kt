@@ -8,7 +8,12 @@ data class TaskItem(
 )
 
 val dummyTodoList = listOf(
-    TaskItem(1, "Task 1", "Description of Task 1"),
+    TaskItem(
+        1,
+        "Task 1",
+//        "Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2Description of Task 2"
+
+        ""),
     TaskItem(2, "Task 2", "Description of Task 2"),
     TaskItem(3, "Task 3", null, isCompleted = true),
     TaskItem(4, "Task 4", "Description of Task 4"),

@@ -38,18 +38,20 @@ fun TaskItemCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp)
+            .padding(8.dp)
             .clickable { onItemClick(taskItem) },
         elevation = CardDefaults.cardElevation(10.dp)
     ) {
         Row(
+            verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(8.dp)
         ) {
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(16.dp),
+                    .padding(start = 16.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -72,19 +74,20 @@ fun TaskItemCard(
                 Column(
                     modifier = Modifier.weight(1f)
                 ) {
+
                     Text(
                         style = Typography.bodyMedium,
                         fontWeight = FontWeight.Bold,
                         text = taskItem.title
                     )
 
-                    taskItem.description?.let { description ->
+                    if (!taskItem.description.isNullOrEmpty()) {
                         Spacer(modifier = Modifier.height(8.dp))
 
                         Text(
                             style = Typography.bodyMedium,
                             fontWeight = FontWeight.Light,
-                            text = description,
+                            text = taskItem.description,
                         )
                     }
                 }
@@ -92,7 +95,6 @@ fun TaskItemCard(
 
             IconButton(
                 modifier = Modifier
-                    .padding(16.dp)
                     .weight(0.2f),
                 onClick = { onDeleteClick(taskItem) }
             ) {
@@ -106,7 +108,7 @@ fun TaskItemCard(
     }
 }
 
-@Preview(showBackground = true)
+@Preview(showBackground = true,)
 @Composable
 fun TaskItemCardPreview() {
     TaskItemCard()
