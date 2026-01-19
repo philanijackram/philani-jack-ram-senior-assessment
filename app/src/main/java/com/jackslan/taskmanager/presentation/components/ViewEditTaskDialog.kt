@@ -59,7 +59,7 @@ fun ViewEditTaskDialog(
 
                 item {
                     OutlinedTextField(
-                        placeholder ={Text(stringResource(R.string.title))},
+                        placeholder ={Text(text=stringResource(R.string.title), style = Typography.bodyMedium)},
                         textStyle = Typography.bodyMedium,
                         value = taskItem.title,
                         onValueChange = {
@@ -70,7 +70,7 @@ fun ViewEditTaskDialog(
 
                 item {
                     OutlinedTextField(
-                        placeholder ={Text(stringResource(R.string.description))},
+                        placeholder ={Text(text=stringResource(R.string.description), style = Typography.bodyMedium)},
                         textStyle = Typography.bodyMedium,
                         maxLines = 3,
                         minLines = 3,

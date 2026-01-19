@@ -58,21 +58,18 @@ fun CreateNewTaskBottomSheet(
                     .padding(8.dp),
                 value = title,
                 onValueChange = onTitleChange,
-                label = {
-                    Text(stringResource(R.string.title))
-                }
+                placeholder ={Text(text=stringResource(R.string.title), style = Typography.bodyMedium)},
             )
 
             OutlinedTextField(
+                placeholder ={Text(text=stringResource(R.string.description), style = Typography.bodyMedium)},
+                maxLines = 3,
                 textStyle = Typography.bodyMedium,
                 value = description,
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(8.dp),
                 onValueChange = onDescriptionChange,
-                label = {
-                    Text(stringResource(R.string.description))
-                }
             )
 
             Row(
