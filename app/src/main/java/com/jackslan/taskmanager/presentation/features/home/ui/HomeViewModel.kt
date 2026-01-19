@@ -63,8 +63,12 @@ class HomeViewModel @Inject constructor(
                     1
                 )
 
-                weatherUiState =
+                weatherUiState = if (weatherData != null) {
                     weatherUiState.copy(weatherData = weatherData.toDomain(), isLoading = false)
+                }else{
+                    weatherUiState.copy(isLoading = false, error = "Error fetching weather data")
+                }
+
             }
         }
     }

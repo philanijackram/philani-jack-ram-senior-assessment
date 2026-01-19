@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.presentation.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -11,11 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -71,17 +72,20 @@ fun ActionConfirmationDialog(
 
                     Button(
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Green,
-                            contentColor = Color.Black
+                            containerColor = MaterialTheme.colorScheme.secondary,
+                            contentColor = MaterialTheme.colorScheme.onSecondary
                         ),
                         modifier = Modifier
                             .weight(1f)
                             .padding(end = 8.dp),
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.primary
+                        ),
                         onClick = {
                             onPositiveClick()
                             onDismissRequest()
                         }) {
-
                         Text(
                             text = positiveButtonText,
                             style = Typography.bodyMedium
@@ -90,20 +94,27 @@ fun ActionConfirmationDialog(
 
                     Button(
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color.Red,
-                            contentColor = Color.White
+                            containerColor = MaterialTheme.colorScheme.primary,
+                            contentColor = MaterialTheme.colorScheme.onPrimary
                         ),
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier
+                            .weight(1f),
+                        border = BorderStroke(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.secondary
+                        ),
                         onClick = {
                             onNegativeClick()
                             onDismissRequest()
                         }) {
                         Text(
                             text = negativeButtonText,
-                            style=Typography.bodyMedium
+                            style = Typography.bodyMedium
                         )
                     }
+
                 }
+
             }
         }
     }

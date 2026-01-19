@@ -16,6 +16,7 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -92,7 +93,11 @@ fun MainScaffold(
         },
         floatingActionButton = {
             if (showFab) {
-                FloatingActionButton(onClick = onFabClick) {
+                FloatingActionButton(
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    contentColor = MaterialTheme.colorScheme.onSecondary,
+                    onClick = onFabClick
+                ) {
                     Icon(
                         painter = painterResource(fabIcon),
                         contentDescription = stringResource(R.string.fab_icon)

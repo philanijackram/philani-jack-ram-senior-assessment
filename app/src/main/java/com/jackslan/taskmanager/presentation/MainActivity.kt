@@ -1,11 +1,13 @@
 package com.jackslan.taskmanager.presentation
 
+import android.Manifest
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.annotation.RequiresPermission
 import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
@@ -26,6 +28,7 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 
+    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -58,7 +61,6 @@ class MainActivity : ComponentActivity() {
                 darkTheme = darkTheme.value
             ) {
                 AppNavGraph(
-                    darkMode = darkTheme.value,
                     navController = navController
                 )
             }

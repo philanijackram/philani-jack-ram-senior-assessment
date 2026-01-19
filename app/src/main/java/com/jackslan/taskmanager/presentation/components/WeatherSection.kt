@@ -24,7 +24,6 @@ import com.jackslan.taskmanager.utils.DateUtils
 
 @Composable
 fun WeatherSection(
-    modifier: Modifier = Modifier,
     weatherItem: WeatherItem? = dummyWeatherData
 ) {
     Card(

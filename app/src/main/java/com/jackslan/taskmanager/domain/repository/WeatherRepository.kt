@@ -7,6 +7,6 @@ interface WeatherRepository {
     suspend fun getWeatherData(
         coordinates: String,
         days: Int,
-    ): WeatherResponse
+    ): WeatherResponse?
 
 }

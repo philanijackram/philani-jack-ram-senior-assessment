@@ -1,6 +1,7 @@
 package com.jackslan.taskmanager.navigation
 
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -13,7 +14,6 @@ import com.jackslan.taskmanager.presentation.features.splash_screen.SplashScreen
 
 @Composable
 fun AppNavGraph(
-    darkMode: Boolean = false,
     navController: NavHostController,
 ) {
     NavHost(
@@ -24,8 +24,9 @@ fun AppNavGraph(
         composable(route = Screen.SplashScreen.route) {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
-            ) {
+            ) { paddingValues ->
                 SplashScreen(
+                    modifier = Modifier.fillMaxSize().padding(paddingValues),
                     onNavigateToHome = {
                         navController.navigate(Screen.HomeScreen.route)
                     }
@@ -36,7 +37,6 @@ fun AppNavGraph(
         composable(route = Screen.HomeScreen.route) {
 
             HomeScreen(
-                darkMode = darkMode,
                 onSettingsClick = {
                     navController.navigate(Screen.SettingsScreen.route)
                 }

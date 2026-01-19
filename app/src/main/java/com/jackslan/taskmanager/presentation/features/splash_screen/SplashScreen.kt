@@ -2,7 +2,6 @@ package com.jackslan.taskmanager.presentation.features.splash_screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -12,6 +11,7 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SplashScreen(
+    modifier: Modifier = Modifier,
     onNavigateToHome: () -> Unit = {}
 ) {
 
@@ -21,7 +21,7 @@ fun SplashScreen(
 
 
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

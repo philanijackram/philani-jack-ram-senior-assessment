@@ -32,7 +32,6 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    darkMode: Boolean = false,
     viewModel: HomeViewModel = hiltViewModel(),
     onSettingsClick: () -> Unit = {},
 ) {
@@ -97,7 +96,6 @@ fun HomeScreen(
             )
 
             FilterPills(
-                darkMode = darkMode,
                 selectedOption = uiState.selectedFilter,
                 onFilterChange = {
                     viewModel.onEvent(HomeEvent.OnFilterChange(it))

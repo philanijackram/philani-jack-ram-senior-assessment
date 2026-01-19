@@ -2,7 +2,7 @@ package com.jackslan.taskmanager.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
+val Purple80 = Color(0xFF100A0A)
 val PurpleGrey80 = Color(0xFFCCC2DC)
 val Pink80 = Color(0xFFEFB8C8)
 

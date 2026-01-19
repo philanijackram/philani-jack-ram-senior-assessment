@@ -10,7 +10,7 @@ class GetWeatherDataUseCase @Inject constructor(
     suspend operator fun invoke(
         coordinates: String,
         days: Int,
-    ): WeatherResponse {
+    ): WeatherResponse? {
         return weatherRepository.getWeatherData(
            coordinates,
             days,

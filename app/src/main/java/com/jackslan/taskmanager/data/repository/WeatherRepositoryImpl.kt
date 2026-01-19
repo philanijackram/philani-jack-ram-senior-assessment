@@ -13,7 +13,7 @@ class WeatherRepositoryImpl @Inject constructor(
     override suspend fun getWeatherData(
         coordinates: String,
         days: Int,
-    ): WeatherResponse {
+    ): WeatherResponse? {
         val response = apiService.getWeatherData(
             coordinates,
             days,
@@ -23,8 +23,8 @@ class WeatherRepositoryImpl @Inject constructor(
             Log.d("WeatherRepository", "Weather data fetched successfully ${response.body()}")
             return response.body()!!
         } else {
-            throw Exception("Failed to fetch weather data")
+            Log.e("WeatherRepository", "Error fetching weather data: ${response.errorBody()}")
+            return null
         }
-
     }
 }
