@@ -1,14 +1,16 @@
 package com.jackslan.taskmanager.presentation.features.splash_screen
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import com.jackslan.taskmanager.R
 
+@Preview(showBackground = true)
 @Composable
 fun SplashScreen(
     modifier: Modifier = Modifier,
@@ -16,20 +18,18 @@ fun SplashScreen(
 ) {
 
     LaunchedEffect(true) {
-        println("Here")
+        Thread.sleep(3000)
+        onNavigateToHome()
     }
 
 
-    Column(
+    Box(
         modifier = modifier,
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        contentAlignment = Alignment.Center
     ) {
-        Text(text = "Splash Screen")
-        Button(
-            onClick = onNavigateToHome,
-        ) {
-            Text(text = "Navigate to Home")
-        }
+        Image(
+            painter = painterResource(id = R.drawable.task_manager_logo),
+            contentDescription = "Task Manager Logo"
+        )
     }
 }

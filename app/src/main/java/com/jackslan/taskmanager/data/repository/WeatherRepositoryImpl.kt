@@ -14,17 +14,22 @@ class WeatherRepositoryImpl @Inject constructor(
         coordinates: String,
         days: Int,
     ): WeatherResponse? {
-        val response = apiService.getWeatherData(
-            coordinates,
-            days,
-            ImportantStrings.WEATHER_API_KEY
-        )
-        if (response.isSuccessful) {
-            Log.d("WeatherRepository", "Weather data fetched successfully ${response.body()}")
-            return response.body()!!
-        } else {
-            Log.e("WeatherRepository", "Error fetching weather data: ${response.errorBody()}")
+        try {
+            val response = apiService.getWeatherData(
+                coordinates,
+                days,
+                ImportantStrings.WEATHER_API_KEY
+            )
+            if (response.isSuccessful) {
+                Log.d("WeatherRepository", "Weather data fetched successfully ${response.body()}")
+                return response.body()!!
+            } else {
+                Log.e("WeatherRepository", "Error fetching weather data: ${response.errorBody()}")
+                return null
+            }
+        } catch (exception: Exception) {
             return null
         }
+
     }
 }
