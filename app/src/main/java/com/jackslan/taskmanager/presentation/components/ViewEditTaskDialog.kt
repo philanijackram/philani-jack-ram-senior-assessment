@@ -34,7 +34,6 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Preview(showBackground = true)
 @Composable
 fun ViewEditTaskDialog(
-    darkMode: Boolean = false,
     onDismissRequest: () -> Unit = {},
     taskItem: TaskItem = dummyTodoList[0],
     onTaskChange: (TaskItem) -> Unit = {},
