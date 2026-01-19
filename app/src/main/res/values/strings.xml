@@ -22,4 +22,6 @@
     <string name="textfield_placeholder">--</string>
     <string name="dark_light_mode_toggle">dark light mode toggle</string>
     <string name="back_icon">back icon</string>
+    <string name="degree_celcius">%1$s °C</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

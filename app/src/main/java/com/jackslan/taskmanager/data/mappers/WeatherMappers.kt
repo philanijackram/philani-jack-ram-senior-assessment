@@ -8,7 +8,7 @@ fun WeatherResponse.toDomain(): WeatherItem {
         currentWeather = current.condition.text,
         sunrise = forecast.forecastday[0].astro.sunrise,
         sunset = forecast.forecastday[0].astro.sunset,
-        temperature = current.temp_c,
+        temperature = current.tempC,
         location = location.region
     )
 }

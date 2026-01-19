@@ -1,8 +1,6 @@
 package com.jackslan.taskmanager.presentation.components
 
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -36,6 +34,7 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Preview(showBackground = true)
 @Composable
 fun ViewEditTaskDialog(
+    darkMode: Boolean = false,
     onDismissRequest: () -> Unit = {},
     taskItem: TaskItem = dummyTodoList[0],
     onTaskChange: (TaskItem) -> Unit = {},
@@ -60,17 +59,21 @@ fun ViewEditTaskDialog(
 
                 item {
                     OutlinedTextField(
+                        placeholder ={Text(stringResource(R.string.title))},
+                        textStyle = Typography.bodyMedium,
                         value = taskItem.title,
                         onValueChange = {
                             onTaskChange(taskItem.copy(title = it))
                         },
                         colors = TextFieldDefaults.colors(
-                            disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                            disabledTextColor = if (darkMode) Color.White else Color.Black,
                         )
                     )
                 }
                 item {
                     OutlinedTextField(
+                        placeholder ={Text(stringResource(R.string.description))},
+                        textStyle = Typography.bodyMedium,
                         maxLines = 3,
                         minLines = 3,
                         value = taskItem.description ?: "",
@@ -79,7 +82,7 @@ fun ViewEditTaskDialog(
                         },
                         modifier = Modifier.padding(vertical = 8.dp),
                         colors = TextFieldDefaults.colors(
-                            disabledTextColor = if (isSystemInDarkTheme()) Color.White else Color.Black,
+                            disabledTextColor = if (darkMode) Color.White else Color.Black,
                         )
                     )
                 }

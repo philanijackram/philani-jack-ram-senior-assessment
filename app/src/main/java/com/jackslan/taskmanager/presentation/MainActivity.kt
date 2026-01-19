@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.compose.rememberNavController
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -47,12 +48,17 @@ class MainActivity : ComponentActivity() {
             }
 
         enableEdgeToEdge()
+
         setContent {
 
             val navController = rememberNavController()
+            val darkTheme = dataStoreManager.darkModeFlow.collectAsState(initial = false)
 
-            TaskManagerTheme {
+            TaskManagerTheme(
+                darkTheme = darkTheme.value
+            ) {
                 AppNavGraph(
+                    darkMode = darkTheme.value,
                     navController = navController
                 )
             }

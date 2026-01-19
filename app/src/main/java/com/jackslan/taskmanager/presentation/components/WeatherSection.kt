@@ -64,7 +64,10 @@ fun WeatherSection(
                 verticalArrangement = Arrangement.Bottom
             ) {
                 Text(
-                    text = if (weatherItem?.temperature != null) " ${weatherItem.temperature}" else stringResource(
+                    text = if (weatherItem?.temperature != null) stringResource(
+                        R.string.degree_celcius,
+                        weatherItem.temperature
+                    ) else stringResource(
                         R.string.textfield_placeholder
                     ),
                     style = Typography.titleLarge,

@@ -13,6 +13,7 @@ import com.jackslan.taskmanager.presentation.features.splash_screen.SplashScreen
 
 @Composable
 fun AppNavGraph(
+    darkMode: Boolean = false,
     navController: NavHostController,
 ) {
     NavHost(
@@ -20,7 +21,7 @@ fun AppNavGraph(
         startDestination = Screen.SplashScreen.route
     ) {
 
-        composable(route = Screen.SplashScreen.route){
+        composable(route = Screen.SplashScreen.route) {
             Scaffold(
                 modifier = Modifier.fillMaxSize()
             ) {
@@ -35,6 +36,7 @@ fun AppNavGraph(
         composable(route = Screen.HomeScreen.route) {
 
             HomeScreen(
+                darkMode = darkMode,
                 onSettingsClick = {
                     navController.navigate(Screen.SettingsScreen.route)
                 }

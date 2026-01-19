@@ -1,8 +1,7 @@
 package com.jackslan.taskmanager.data.remote.model
 
+import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
-
-
 
 @Serializable
 data class WeatherResponse(
@@ -23,12 +22,16 @@ data class WeatherResponse(
 
     @Serializable
     data class CurrentWeather(
-        val temp_c: Double,
-        val feelslike_c: Double,
-        val is_day: Int,
+        @SerializedName("temp_c")
+        val tempC: Double,
+        @SerializedName("feelslike_c")
+        val feelsLikeC: Double,
+        @SerializedName("is_day")
+        val isDay: Int,
         val humidity: Int,
         val uv: Double,
-        val wind_kph: Double,
+        @SerializedName("wind_kph")
+        val windKph: Double,
         val condition: Condition
     )
 
@@ -46,10 +49,14 @@ data class WeatherResponse(
 
     @Serializable
     data class Day(
-        val maxtemp_c: Double,
-        val mintemp_c: Double,
-        val avgtemp_c: Double,
-        val daily_chance_of_rain: Int,
+        @SerializedName("maxtemp_c")
+        val maxTempC: Double,
+        @SerializedName("mintemp_c")
+        val minTempC: Double,
+        @SerializedName("avgtemp_c")
+        val avgTempC: Double,
+        @SerializedName("daily_chance_of_rain")
+        val dailyChanceOfRain: Int,
         val uv: Double,
         val condition: Condition
     )
@@ -60,8 +67,10 @@ data class WeatherResponse(
         val sunset: String,
         val moonrise: String,
         val moonset: String,
-        val moon_phase: String,
-        val moon_illumination: Int
+        @SerializedName("moon_phase")
+        val moonPhase: String,
+        @SerializedName("moon_illumination")
+        val moonIllumination: Int
     )
 
     @Serializable

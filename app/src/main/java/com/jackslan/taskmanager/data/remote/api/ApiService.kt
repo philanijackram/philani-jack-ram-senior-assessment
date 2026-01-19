@@ -1,6 +1,5 @@
 package com.jackslan.taskmanager.data.remote.api
 
-
 import com.jackslan.taskmanager.data.remote.model.WeatherResponse
 import retrofit2.Response
 import retrofit2.http.GET

@@ -8,22 +8,25 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.presentation.theme.Typography
-
 
 @Preview(showBackground = true)
 @Composable
 fun SettingsItemCard(
     icon: Int = R.drawable.unchecked_icon,
     title: String = "To Do",
+    checked: Boolean = false,
+    onCheckedChange: (Boolean) -> Unit = {},
     onClick: () -> Unit = {}
 ) {
     Card(
@@ -40,22 +43,39 @@ fun SettingsItemCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Icon(
-                painter = painterResource(id = icon),
-                contentDescription = "icon"
-            )
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    painter = painterResource(id = icon),
+                    contentDescription = "icon"
+                )
 
-            Text(
-                text = title,
-                style= Typography.bodyMedium,
-                modifier = Modifier.padding(start = 16.dp)
-            )
+                Text(
+                    text = title,
+                    style = Typography.bodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(start = 16.dp)
+                )
+            }
 
-            Icon(
-                painter = painterResource(id = R.drawable.right_arrow_icon),
-                contentDescription = "icon arrow"
+            SwitchMinimalExample(
+                checked = checked,
+                onCheckedChange = onCheckedChange
             )
 
         }
     }
+}
+
+@Composable
+fun SwitchMinimalExample(
+    checked: Boolean = false,
+    onCheckedChange: (Boolean) -> Unit = {}
+) {
+
+    Switch(
+        checked = checked,
+        onCheckedChange = {
+            onCheckedChange(it)
+        }
+    )
 }

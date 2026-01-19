@@ -19,7 +19,6 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
 import java.util.Locale
 
-
 @Composable
 fun AstroCard(
     modifier: Modifier = Modifier,

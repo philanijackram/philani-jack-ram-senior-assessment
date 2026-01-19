@@ -15,6 +15,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -26,6 +27,7 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Preview(showBackground = true)
 @Composable
 fun FilterPills(
+    darkMode: Boolean = false,
     selectedOption: String = "ALL",
     onFilterChange: (String) -> Unit = {},
     filterOptions: List<String> = listOf("ALL", "TO DO", "COMPLETED")
@@ -46,14 +48,14 @@ fun FilterPills(
                     .clickable { onFilterChange(filterOption) },
                 colors = CardDefaults.cardColors(
                     containerColor = if (isSelected) {
-                        if (!isSystemInDarkTheme()) Color(0xFF5E5D5D) else Color(0xFFFDFDFD)
+                        if (!darkMode) Color(0xFF5E5D5D) else Color(0xFFFDFDFD)
                     } else {
-                        if (!isSystemInDarkTheme()) Color(0xFFFDFDFD) else Color(0xFF5E5D5D)
+                        if (!darkMode) Color(0xFFFDFDFD) else Color(0xFF5E5D5D)
                     },
                     contentColor = if (isSelected) {
-                        if (!isSystemInDarkTheme()) Color.White else Color.Black
+                        if (!darkMode) Color.White else Color.Black
                     } else {
-                        if (!isSystemInDarkTheme()) Color.Black else Color.White
+                        if (!darkMode) Color.Black else Color.White
                     }
                 ),
                 elevation = CardDefaults.cardElevation(2.dp)
