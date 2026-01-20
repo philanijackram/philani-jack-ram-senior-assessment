@@ -6,6 +6,7 @@ import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.data.local.AppDatabase
 import com.jackslan.taskmanager.data.local.ToDoDao
 import com.jackslan.taskmanager.data.local.DataStoreManager
+import com.jackslan.taskmanager.data.local.DataStoreManagerImpl
 import com.jackslan.taskmanager.data.remote.api.ApiService
 import com.jackslan.taskmanager.data.repository.ToDoRepositoryImpl
 import com.jackslan.taskmanager.data.repository.WeatherRepositoryImpl
@@ -72,7 +73,7 @@ class AppModule {
     //Data Store
     @Provides
     fun provideUserManager(@ApplicationContext context: Context): DataStoreManager {
-        return DataStoreManager(context)
+        return DataStoreManagerImpl(context)
     }
 
     //Use Cases
