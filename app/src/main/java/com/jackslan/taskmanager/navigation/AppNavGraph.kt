@@ -7,7 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.jackslan.taskmanager.presentation.features.home.ui.HomeScreen
-import com.jackslan.taskmanager.presentation.features.settings.SettingsScreen
+import com.jackslan.taskmanager.presentation.features.settings.ui.SettingsScreen
 import com.jackslan.taskmanager.presentation.features.splash_screen.SplashScreen
 
 @Composable

@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.features.settings
+package com.jackslan.taskmanager.presentation.features.settings.ui
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -11,7 +11,8 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.presentation.components.MainScaffold
-import com.jackslan.taskmanager.presentation.components.SettingsItemCard
+import com.jackslan.taskmanager.presentation.features.settings.ui.components.SettingsItemCard
+import com.jackslan.taskmanager.presentation.features.settings.state.SettingsEvent
 
 @Preview(showBackground = true)
 @Composable

@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

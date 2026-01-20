@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.settings.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -24,7 +25,7 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Composable
 fun SettingsItemCard(
     icon: Int = R.drawable.unchecked_icon,
-    title: String = "To Do",
+    title: String = stringResource(R.string.dark_mode_placeholder),
     checked: Boolean = false,
     onCheckedChange: (Boolean) -> Unit = {},
     onClick: () -> Unit = {}
@@ -46,7 +47,7 @@ fun SettingsItemCard(
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(
                     painter = painterResource(id = icon),
-                    contentDescription = "icon"
+                    contentDescription = stringResource(R.string.icon)
                 )
 
                 Text(

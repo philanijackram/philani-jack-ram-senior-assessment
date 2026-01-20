@@ -1,5 +1,6 @@
 package com.jackslan.taskmanager.utils
 
-enum class AstroType {
-    SUNRISE, SUNSET
+enum class AstroType(val value: String) {
+    SUNRISE("Sunrise"),
+    SUNSET("Sunset")
 }

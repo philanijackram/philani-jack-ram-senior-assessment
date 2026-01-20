@@ -21,14 +21,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.presentation.theme.Typography
+import com.jackslan.taskmanager.utils.ToDoFilterOptions
 
 @Preview(showBackground = true)
 @PreviewLightDark
 @Composable
 fun FilterPills(
-    selectedOption: String = "ALL",
+    selectedOption: String = ToDoFilterOptions.ALL.value,
     onFilterChange: (String) -> Unit = {},
-    filterOptions: List<String> = listOf("ALL", "TO DO", "COMPLETED")
+    filterOptions: List<String> = ToDoFilterOptions.entries.map { it.value }
 ) {
 
     LazyRow(

@@ -24,4 +24,13 @@
     <string name="back_icon">back icon</string>
     <string name="degree_celcius">%1$s °C</string>
     <string name="dark_mode">Dark Mode</string>
+    <string name="title_cannot_be_empty">Title cannot be empty</string>
+    <string name="title_placeholder">Title</string>
+    <string name="message_placeholder">Message</string>
+    <string name="yes_placeholder">Yes</string>
+    <string name="no_placeholder">No</string>
+    <string name="description_placeholder">Description</string>
+    <string name="icon">icon</string>
+    <string name="dark_mode_placeholder">Dark Mode</string>
+    <string name="task_manager_logo">Task Manager Logo</string>
 </resources>

@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn

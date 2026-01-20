@@ -21,14 +21,15 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.presentation.components.ActionConfirmationDialog
-import com.jackslan.taskmanager.presentation.components.CreateNewTaskBottomSheet
+import com.jackslan.taskmanager.presentation.features.home.ui.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
 import com.jackslan.taskmanager.presentation.components.MainScaffold
-import com.jackslan.taskmanager.presentation.components.TaskListSection
-import com.jackslan.taskmanager.presentation.components.ViewEditTaskDialog
-import com.jackslan.taskmanager.presentation.components.WeatherSection
+import com.jackslan.taskmanager.presentation.features.home.ui.components.TaskListSection
+import com.jackslan.taskmanager.presentation.features.home.ui.components.ViewEditTaskDialog
+import com.jackslan.taskmanager.presentation.features.home.ui.components.WeatherSection
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEffect
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEvent
+import com.jackslan.taskmanager.utils.ToDoFilterOptions
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -107,7 +108,7 @@ fun HomeScreen(
                 onFilterChange = {
                     viewModel.onEvent(HomeEvent.OnFilterChange(it))
                 },
-                filterOptions = listOf("ALL", "TO DO", "COMPLETED")
+                filterOptions = ToDoFilterOptions.entries.map { it.value }
             )
 
             TaskListSection(
@@ -146,7 +147,7 @@ fun HomeScreen(
                     },
                     onConfirm = {
                         if (uiState.title.isEmpty()) {
-                            viewModel.emitEffect(HomeEffect.ShowError("Title cannot be empty"))
+                            viewModel.emitEffect(HomeEffect.ShowError(context.getString(R.string.title_cannot_be_empty)))
                         } else {
                             viewModel.onEvent(
                                 HomeEvent.OnCreateTaskClick(

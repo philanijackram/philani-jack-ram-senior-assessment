@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -26,8 +26,8 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Preview(showBackground = true)
 @Composable
 fun CreateNewTaskBottomSheet(
-    title: String = "Title",
-    description: String = "Description",
+    title: String = stringResource(R.string.title_placeholder),
+    description: String = stringResource(R.string.description_placeholder),
     onTitleChange: (String) -> Unit = {},
     onDescriptionChange: (String) -> Unit = {},
     onConfirm: () -> Unit = {},
@@ -61,7 +61,7 @@ fun CreateNewTaskBottomSheet(
                 onValueChange = onTitleChange,
                 placeholder = {
                     Text(
-                        text = stringResource(R.string.title),
+                        text = stringResource(R.string.title_placeholder),
                         style = Typography.bodyMedium
                     )
                 },
@@ -70,7 +70,7 @@ fun CreateNewTaskBottomSheet(
             OutlinedTextField(
                 placeholder = {
                     Text(
-                        text = stringResource(R.string.description),
+                        text = stringResource(R.string.description_placeholder),
                         style = Typography.bodyMedium
                     )
                 },

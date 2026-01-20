@@ -1,6 +1,8 @@
 package com.jackslan.taskmanager.presentation.features.settings
 
 import com.jackslan.taskmanager.data.local.FakeDataStoreManager
+import com.jackslan.taskmanager.presentation.features.settings.state.SettingsEvent
+import com.jackslan.taskmanager.presentation.features.settings.ui.SettingsViewModel
 import com.jackslan.taskmanager.utils.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle

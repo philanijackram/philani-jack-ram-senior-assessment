@@ -19,7 +19,8 @@ import com.jackslan.taskmanager.domain.use_case.weather.GetWeatherDataUseCase
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEffect
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEvent
 import com.jackslan.taskmanager.presentation.features.home.state.HomeUiState
-import com.jackslan.taskmanager.presentation.features.weather.WeatherUiState
+import com.jackslan.taskmanager.presentation.features.home.state.WeatherUiState
+import com.jackslan.taskmanager.utils.ToDoFilterOptions
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
@@ -56,7 +57,7 @@ class HomeViewModel @Inject constructor(
         weatherUiState = weatherUiState.copy(isLoading = true)
         viewModelScope.launch {
 
-            dataStoreManager.locationFlow.collect { coordinates ->
+            dataStoreManager.coordinatesFlow.collect { coordinates ->
 
                 val weatherData = getWeatherDataUseCase(
                     coordinates = coordinates,
@@ -65,7 +66,7 @@ class HomeViewModel @Inject constructor(
 
                 weatherUiState = if (weatherData != null) {
                     weatherUiState.copy(weatherData = weatherData.toDomain(), isLoading = false)
-                }else{
+                } else {
                     weatherUiState.copy(isLoading = false, error = "Error fetching weather data")
                 }
 
@@ -89,28 +90,19 @@ class HomeViewModel @Inject constructor(
         }
     }
 
-    fun getAllTasks() {
-        viewModelScope.launch {
-            uiState = uiState.copy(isLoading = true)
-            getAllTasksUseCase().collect { tasks ->
-                uiState = uiState.copy(tasks = tasks, isLoading = false)
-            }
-        }
-    }
-
     fun fetchTasks() {
         viewModelScope.launch {
             uiState = uiState.copy(isLoading = true)
             when (uiState.selectedFilter) {
-                "ALL" -> getAllTasksUseCase().collect { tasks ->
+                ToDoFilterOptions.ALL.value -> getAllTasksUseCase().collect { tasks ->
                     uiState = uiState.copy(tasks = tasks)
                 }
 
-                "TO DO" -> getIncompleteTasksUseCase().collect { tasks ->
+                ToDoFilterOptions.TO_DO.value -> getIncompleteTasksUseCase().collect { tasks ->
                     uiState = uiState.copy(tasks = tasks)
                 }
 
-                "COMPLETED" -> getCompletedTasksUseCase().collect { tasks ->
+                ToDoFilterOptions.COMPLETED.value -> getCompletedTasksUseCase().collect { tasks ->
                     uiState = uiState.copy(tasks = tasks)
                 }
 
@@ -147,14 +139,17 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun onFilterChange(filter: String) {
-        uiState = uiState.copy(selectedFilter = filter, showFab = filter != "COMPLETED")
+        uiState = uiState.copy(
+            selectedFilter = filter,
+            showFab = filter != ToDoFilterOptions.COMPLETED.value
+        )
         fetchTasks()
     }
 
     fun onEvent(event: HomeEvent) {
         when (event) {
             is HomeEvent.LoadTasks -> {
-                getAllTasks()
+                fetchTasks()
                 getWeatherData()
             }
 

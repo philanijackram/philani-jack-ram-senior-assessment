@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -104,11 +104,10 @@ fun TaskItemCard(
                 )
             }
         }
-
     }
 }
 
-@Preview(showBackground = true,)
+@Preview(showBackground = true)
 @Composable
 fun TaskItemCardPreview() {
     TaskItemCard()

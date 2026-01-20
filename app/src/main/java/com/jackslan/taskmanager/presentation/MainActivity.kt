@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             .addOnSuccessListener { location: Location? ->
 
                 lifecycleScope.launch {
-                    dataStoreManager.storeLocation(
+                    dataStoreManager.storeCoordinates(
                         coordinates = "${location?.latitude}, ${location?.longitude}"
                     )
 

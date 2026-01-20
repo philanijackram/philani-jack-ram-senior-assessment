@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
@@ -35,8 +35,8 @@ import com.jackslan.taskmanager.presentation.theme.Typography
 @Preview(showBackground = true)
 @Composable
 fun ViewEditTaskDialog(
-    onDismissRequest: () -> Unit = {},
     taskItem: TaskItem = dummyTodoList[0],
+    onDismissRequest: () -> Unit = {},
     onTaskChange: (TaskItem) -> Unit = {},
     onUpdateClick: () -> Unit = {}
 ) {
@@ -59,7 +59,12 @@ fun ViewEditTaskDialog(
 
                 item {
                     OutlinedTextField(
-                        placeholder ={Text(text=stringResource(R.string.title), style = Typography.bodyMedium)},
+                        placeholder = {
+                            Text(
+                                text = stringResource(R.string.title_placeholder),
+                                style = Typography.bodyMedium
+                            )
+                        },
                         textStyle = Typography.titleMedium.copy(fontWeight = FontWeight.Normal),
                         value = taskItem.title,
                         onValueChange = {
@@ -70,7 +75,12 @@ fun ViewEditTaskDialog(
 
                 item {
                     OutlinedTextField(
-                        placeholder ={Text(text=stringResource(R.string.description), style = Typography.bodyMedium)},
+                        placeholder = {
+                            Text(
+                                text = stringResource(R.string.description_placeholder),
+                                style = Typography.bodyMedium
+                            )
+                        },
                         textStyle = Typography.bodyMedium,
                         maxLines = 3,
                         minLines = 3,
@@ -110,7 +120,6 @@ fun ViewEditTaskDialog(
                                     }
                                 ),
                                 contentDescription = stringResource(R.string.check_indicator),
-
                                 )
                         }
                     }
@@ -166,7 +175,6 @@ fun ViewEditTaskDialog(
                         }
                     }
                 }
-
             }
         }
     }

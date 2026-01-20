@@ -8,34 +8,34 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-val Context.myDataStore by preferencesDataStore(name = "app_prefs")
+val Context.dataStore by preferencesDataStore(name = "app_prefs")
 
 class DataStoreManagerImpl(
     private val context: Context
 ) : DataStoreManager {
 
     companion object {
-        val LOCATION = stringPreferencesKey("LOCATION")
+        val COORDINATES = stringPreferencesKey("COORDINATES")
         val DARK_MODE = booleanPreferencesKey("DARK_MODE")
     }
 
     override suspend fun storeDarkMode(isDarkMode: Boolean) {
-        context.myDataStore.edit {
+        context.dataStore.edit {
             it[DARK_MODE] = isDarkMode
         }
     }
 
-    override suspend fun storeLocation(coordinates: String) {
-        context.myDataStore.edit {
-            it[LOCATION] = coordinates
+    override suspend fun storeCoordinates(coordinates: String) {
+        context.dataStore.edit {
+            it[COORDINATES] = coordinates
         }
     }
 
-    override val locationFlow: Flow<String> = context.myDataStore.data.map {
-        it[LOCATION] ?: ""
+    override val coordinatesFlow: Flow<String> = context.dataStore.data.map {
+        it[COORDINATES] ?: ""
     }
 
-    override val darkModeFlow: Flow<Boolean> = context.myDataStore.data.map {
+    override val darkModeFlow: Flow<Boolean> = context.dataStore.data.map {
         it[DARK_MODE] ?: false
     }
 

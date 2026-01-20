@@ -17,22 +17,24 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
 @Composable
 fun ActionConfirmationDialog(
-    title: String = "Title",
-    message: String = "Message",
+    title: String = stringResource(R.string.title_placeholder),
+    message: String = stringResource(R.string.message_placeholder),
+    positiveButtonText: String = stringResource(R.string.yes_placeholder),
+    negativeButtonText: String = stringResource(R.string.no_placeholder),
     onPositiveClick: () -> Unit = {},
     onNegativeClick: () -> Unit = {},
-    positiveButtonText: String = "Yes",
-    negativeButtonText: String = "No",
     onDismissRequest: () -> Unit = {}
 ) {
 
@@ -114,7 +116,6 @@ fun ActionConfirmationDialog(
                             style = Typography.bodyMedium
                         )
                     }
-
                 }
             }
         }

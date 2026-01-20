@@ -1,10 +1,11 @@
 package com.jackslan.taskmanager.presentation.features.home.state
 
 import com.jackslan.taskmanager.domain.model.TaskItem
+import com.jackslan.taskmanager.utils.ToDoFilterOptions
 
 data class HomeUiState(
     val isLoading: Boolean = false,
-    val selectedFilter: String = "ALL",
+    val selectedFilter: String = ToDoFilterOptions.ALL.value,
     val showFab: Boolean = true,
     val error: String? = null,
     val tasks: List<TaskItem> = emptyList(),

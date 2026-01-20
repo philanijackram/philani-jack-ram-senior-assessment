@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.features.weather
+package com.jackslan.taskmanager.presentation.features.home.state
 
 import com.jackslan.taskmanager.domain.model.WeatherItem
 

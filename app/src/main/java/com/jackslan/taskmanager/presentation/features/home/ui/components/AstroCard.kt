@@ -1,4 +1,4 @@
-package com.jackslan.taskmanager.presentation.components
+package com.jackslan.taskmanager.presentation.features.home.ui.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
-import java.util.Locale
 
 @Composable
 fun AstroCard(
@@ -55,8 +54,7 @@ fun AstroCard(
             Text(
                 style = Typography.bodyMedium,
                 modifier = Modifier.padding(vertical = 4.dp),
-                text = astroType.name.lowercase(Locale.ROOT)
-                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.ROOT) else it.toString() }
+                text = astroType.value
             )
 
             Text(
