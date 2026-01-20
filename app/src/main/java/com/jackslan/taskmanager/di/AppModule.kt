@@ -72,12 +72,11 @@ class AppModule {
 
     //Data Store
     @Provides
-    fun provideUserManager(@ApplicationContext context: Context): DataStoreManager {
+    fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManager {
         return DataStoreManagerImpl(context)
     }
 
     //Use Cases
-
     @Provides
     fun provideCreateNewTaskUseCase(toDoRepository: ToDoRepository): CreateNewTaskUseCase {
         return CreateNewTaskUseCase(toDoRepository)
