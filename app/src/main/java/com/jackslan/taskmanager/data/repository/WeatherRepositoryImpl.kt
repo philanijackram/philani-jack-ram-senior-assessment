@@ -28,6 +28,7 @@ class WeatherRepositoryImpl @Inject constructor(
                 return null
             }
         } catch (exception: Exception) {
+            Log.e("WeatherRepository", "Error fetching weather data: ${exception.message}")
             return null
         }
 

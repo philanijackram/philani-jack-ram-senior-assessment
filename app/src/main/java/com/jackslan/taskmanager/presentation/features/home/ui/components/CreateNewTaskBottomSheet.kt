@@ -18,8 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,14 +49,14 @@ fun CreateNewTaskBottomSheet(
             Text(
                 text = stringResource(R.string.create_new_task),
                 style = Typography.titleLarge,
-                modifier = Modifier.padding(8.dp)
+                modifier = Modifier.padding(Dimens.mediumPadding)
             )
 
             OutlinedTextField(
                 textStyle = Typography.bodyMedium,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(Dimens.mediumPadding),
                 value = title,
                 onValueChange = onTitleChange,
                 placeholder = {
@@ -79,14 +79,14 @@ fun CreateNewTaskBottomSheet(
                 value = description,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(Dimens.mediumPadding),
                 onValueChange = onDescriptionChange,
             )
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp),
+                    .padding(Dimens.mediumPadding),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
 
@@ -97,9 +97,9 @@ fun CreateNewTaskBottomSheet(
                     ),
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = 8.dp),
+                        .padding(end = Dimens.mediumPadding),
                     border = BorderStroke(
-                        width = 1.dp,
+                        width = Dimens.borderSize,
                         color = MaterialTheme.colorScheme.primary
                     ),
                     onClick = {
@@ -119,7 +119,7 @@ fun CreateNewTaskBottomSheet(
                     modifier = Modifier
                         .weight(1f),
                     border = BorderStroke(
-                        width = 1.dp,
+                        width = Dimens.borderSize,
                         color = MaterialTheme.colorScheme.secondary
                     ),
                     onClick = {

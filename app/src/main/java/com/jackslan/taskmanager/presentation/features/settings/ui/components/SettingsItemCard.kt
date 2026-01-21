@@ -17,8 +17,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
@@ -33,14 +33,14 @@ fun SettingsItemCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(4.dp)
+            .padding(Dimens.smallPadding)
             .clickable { onClick() },
-        elevation = CardDefaults.cardElevation(10.dp)
+        elevation = CardDefaults.cardElevation(Dimens.cardElevation)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
+                .padding(Dimens.largePadding),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
@@ -54,7 +54,7 @@ fun SettingsItemCard(
                     text = title,
                     style = Typography.bodyMedium,
                     fontWeight = FontWeight.Bold,
-                    modifier = Modifier.padding(start = 16.dp)
+                    modifier = Modifier.padding(start = Dimens.largePadding)
                 )
             }
 

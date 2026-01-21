@@ -21,9 +21,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
@@ -42,9 +42,9 @@ fun ActionConfirmationDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp)
-                .padding(vertical = 16.dp, horizontal = 8.dp),
-            shape = RoundedCornerShape(16.dp),
+                .height(Dimens.smallDialogHeight)
+                .padding(vertical = Dimens.largePadding, horizontal = Dimens.smallPadding),
+            shape = RoundedCornerShape(Dimens.largePadding),
         ) {
 
             Column(
@@ -62,7 +62,7 @@ fun ActionConfirmationDialog(
                 Text(
                     style = Typography.bodyMedium,
                     modifier = Modifier
-                        .padding(8.dp),
+                        .padding(Dimens.mediumPadding),
                     text = message,
                     textAlign = TextAlign.Center,
                 )
@@ -70,7 +70,7 @@ fun ActionConfirmationDialog(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(8.dp),
+                        .padding(Dimens.mediumPadding),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
 
@@ -81,9 +81,9 @@ fun ActionConfirmationDialog(
                         ),
                         modifier = Modifier
                             .weight(1f)
-                            .padding(end = 8.dp),
+                            .padding(end = Dimens.mediumPadding),
                         border = BorderStroke(
-                            width = 1.dp,
+                            width = Dimens.borderSize,
                             color = MaterialTheme.colorScheme.primary
                         ),
                         onClick = {
@@ -104,7 +104,7 @@ fun ActionConfirmationDialog(
                         modifier = Modifier
                             .weight(1f),
                         border = BorderStroke(
-                            width = 1.dp,
+                            width = Dimens.borderSize,
                             color = MaterialTheme.colorScheme.secondary
                         ),
                         onClick = {

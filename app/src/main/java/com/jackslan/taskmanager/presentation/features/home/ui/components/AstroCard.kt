@@ -13,8 +13,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
 
@@ -26,12 +26,12 @@ fun AstroCard(
 
 ) {
     Card(
-        modifier = modifier.padding(8.dp),
-        elevation = CardDefaults.cardElevation(10.dp)
+        modifier = modifier.padding(Dimens.mediumPadding),
+        elevation = CardDefaults.cardElevation(Dimens.cardElevation)
     ) {
         Column(
             modifier = Modifier
-                .padding(16.dp)
+                .padding(Dimens.largePadding)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -53,7 +53,7 @@ fun AstroCard(
 
             Text(
                 style = Typography.bodyMedium,
-                modifier = Modifier.padding(vertical = 4.dp),
+                modifier = Modifier.padding(vertical = Dimens.smallPadding),
                 text = astroType.value
             )
 

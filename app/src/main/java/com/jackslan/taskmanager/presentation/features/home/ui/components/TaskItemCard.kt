@@ -22,10 +22,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Composable
@@ -38,20 +38,20 @@ fun TaskItemCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(Dimens.mediumPadding)
             .clickable { onItemClick(taskItem) },
-        elevation = CardDefaults.cardElevation(10.dp)
+        elevation = CardDefaults.cardElevation(Dimens.cardElevation)
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(Dimens.mediumPadding)
         ) {
             Row(
                 modifier = Modifier
                     .weight(1f)
-                    .padding(start = 16.dp),
+                    .padding(start = Dimens.largePadding),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
@@ -65,7 +65,7 @@ fun TaskItemCard(
                     ),
                     contentDescription = stringResource(R.string.check_indicator),
                     modifier = Modifier
-                        .padding(end = 16.dp)
+                        .padding(end = Dimens.largePadding)
                         .clickable {
                             onCheckedChange(taskItem.id)
                         }
@@ -82,7 +82,7 @@ fun TaskItemCard(
                     )
 
                     if (!taskItem.description.isNullOrEmpty()) {
-                        Spacer(modifier = Modifier.height(8.dp))
+                        Spacer(modifier = Modifier.height(Dimens.mediumPadding))
 
                         Text(
                             style = Typography.bodyMedium,

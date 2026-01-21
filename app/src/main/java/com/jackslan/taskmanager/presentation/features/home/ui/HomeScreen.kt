@@ -29,6 +29,7 @@ import com.jackslan.taskmanager.presentation.features.home.ui.components.ViewEdi
 import com.jackslan.taskmanager.presentation.features.home.ui.components.WeatherSection
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEffect
 import com.jackslan.taskmanager.presentation.features.home.state.HomeEvent
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.utils.ToDoFilterOptions
 import kotlinx.coroutines.launch
 
@@ -96,7 +97,7 @@ fun HomeScreen(
         }
     ) {
         Column(
-            modifier = Modifier.padding(top = 60.dp)
+            modifier = Modifier.padding(top = Dimens.mainComponentPaddingTop)
         ) {
 
             WeatherSection(

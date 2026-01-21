@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
-import androidx.compose.ui.unit.dp
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.ToDoFilterOptions
 
@@ -34,16 +34,20 @@ fun FilterPills(
 
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        contentPadding = PaddingValues(4.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(Dimens.smallPadding),
+        horizontalArrangement = Arrangement.spacedBy(Dimens.mediumPadding)
     ) {
         items(filterOptions) { filterOption ->
             val isSelected = filterOption == selectedOption
             Card(
                 modifier = Modifier
-                    .padding(4.dp)
-                    .border(1.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(16.dp))
-                    .shadow(4.dp, RoundedCornerShape(16.dp))
+                    .padding(Dimens.smallPadding)
+                    .border(
+                        Dimens.borderSize,
+                        MaterialTheme.colorScheme.primary,
+                        RoundedCornerShape(Dimens.largePadding)
+                    )
+                    .shadow(Dimens.smallPadding, RoundedCornerShape(Dimens.largePadding))
                     .clickable { onFilterChange(filterOption) },
                 colors = CardDefaults.cardColors(
                     containerColor = if (isSelected) {
@@ -57,12 +61,12 @@ fun FilterPills(
                         MaterialTheme.colorScheme.onPrimary
                     }
                 ),
-                elevation = CardDefaults.cardElevation(2.dp)
+                elevation = CardDefaults.cardElevation(Dimens.pillElevation)
 
             ) {
                 Box(
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(Dimens.mediumPadding)
 
                 ) {
                     Text(

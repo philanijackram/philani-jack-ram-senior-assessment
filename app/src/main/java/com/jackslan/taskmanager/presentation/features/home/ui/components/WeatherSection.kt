@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.WeatherItem
 import com.jackslan.taskmanager.domain.model.dummyWeatherData
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 import com.jackslan.taskmanager.utils.AstroType
 import com.jackslan.taskmanager.utils.DateUtils
@@ -29,13 +29,13 @@ fun WeatherSection(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 16.dp, horizontal = 8.dp),
-        elevation = CardDefaults.cardElevation(10.dp)
+            .padding(Dimens.mediumPadding),
+        elevation = CardDefaults.cardElevation(Dimens.cardElevation)
     ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+                .padding(Dimens.largePadding),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -48,7 +48,7 @@ fun WeatherSection(
                 Text(
                     text = DateUtils.getTodayDate(),
                     style = Typography.bodyLarge,
-                    modifier = Modifier.padding(vertical = 8.dp)
+                    modifier = Modifier.padding(vertical = Dimens.mediumPadding)
                 )
 
                 Text(
@@ -83,7 +83,7 @@ fun WeatherSection(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(bottom = 8.dp),
+                .padding(bottom = Dimens.mediumPadding),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {

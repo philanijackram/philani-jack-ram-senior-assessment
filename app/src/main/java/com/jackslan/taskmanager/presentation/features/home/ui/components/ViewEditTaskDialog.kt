@@ -25,11 +25,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
 import com.jackslan.taskmanager.domain.model.dummyTodoList
+import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.presentation.theme.Typography
 
 @Preview(showBackground = true)
@@ -45,14 +45,14 @@ fun ViewEditTaskDialog(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(400.dp)
-                .padding(vertical = 16.dp, horizontal = 8.dp),
-            shape = RoundedCornerShape(16.dp),
+                .height(Dimens.mediumDialogHeight)
+                .padding(vertical = Dimens.largePadding, horizontal = Dimens.mediumPadding),
+            shape = RoundedCornerShape(Dimens.largePadding),
         ) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(16.dp),
+                    .padding(Dimens.largePadding),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
             ) {
@@ -88,7 +88,7 @@ fun ViewEditTaskDialog(
                         onValueChange = {
                             onTaskChange(taskItem.copy(description = it))
                         },
-                        modifier = Modifier.padding(vertical = 8.dp)
+                        modifier = Modifier.padding(vertical = Dimens.mediumPadding)
                     )
                 }
 
@@ -129,7 +129,7 @@ fun ViewEditTaskDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 8.dp),
+                            .padding(vertical = Dimens.mediumPadding),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
 
@@ -139,12 +139,12 @@ fun ViewEditTaskDialog(
                                 contentColor = MaterialTheme.colorScheme.onSecondary
                             ),
                             border = BorderStroke(
-                                width = 1.dp,
+                                width = Dimens.borderSize,
                                 color = MaterialTheme.colorScheme.primary
                             ),
                             modifier = Modifier
                                 .weight(1f)
-                                .padding(end = 8.dp),
+                                .padding(end = Dimens.mediumPadding),
                             onClick = {
                                 onUpdateClick()
                                 onDismissRequest()
@@ -161,7 +161,7 @@ fun ViewEditTaskDialog(
                                 contentColor = MaterialTheme.colorScheme.onPrimary
                             ),
                             border = BorderStroke(
-                                width = 1.dp,
+                                width = Dimens.borderSize,
                                 color = MaterialTheme.colorScheme.secondary
                             ),
                             modifier = Modifier.weight(1f),
