@@ -1,6 +1,7 @@
 package com.jackslan.taskmanager.presentation.features.home.ui
 
 import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -16,19 +17,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.jackslan.taskmanager.R
 import com.jackslan.taskmanager.domain.model.TaskItem
+import com.jackslan.taskmanager.presentation.MainActivity
 import com.jackslan.taskmanager.presentation.components.ActionConfirmationDialog
-import com.jackslan.taskmanager.presentation.features.home.ui.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.components.FilterPills
 import com.jackslan.taskmanager.presentation.components.MainScaffold
+import com.jackslan.taskmanager.presentation.features.home.state.HomeEffect
+import com.jackslan.taskmanager.presentation.features.home.state.HomeEvent
+import com.jackslan.taskmanager.presentation.features.home.ui.components.CreateNewTaskBottomSheet
 import com.jackslan.taskmanager.presentation.features.home.ui.components.TaskListSection
 import com.jackslan.taskmanager.presentation.features.home.ui.components.ViewEditTaskDialog
 import com.jackslan.taskmanager.presentation.features.home.ui.components.WeatherSection
-import com.jackslan.taskmanager.presentation.features.home.state.HomeEffect
-import com.jackslan.taskmanager.presentation.features.home.state.HomeEvent
 import com.jackslan.taskmanager.presentation.theme.Dimens
 import com.jackslan.taskmanager.utils.ToDoFilterOptions
 import kotlinx.coroutines.launch
@@ -37,7 +38,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun HomeScreen(
     viewModel: HomeViewModel = hiltViewModel(),
-    onSettingsClick: () -> Unit = {},
+    onSettingsClick: () -> Unit = {}
 ) {
 
     val sheetState = rememberModalBottomSheetState()
@@ -84,6 +85,10 @@ fun HomeScreen(
 
             }
         }
+    }
+
+    BackHandler {
+        (context as? MainActivity)?.finishAffinity()
     }
 
     MainScaffold(

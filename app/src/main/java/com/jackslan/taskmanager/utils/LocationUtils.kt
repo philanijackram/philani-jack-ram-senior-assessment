@@ -1,26 +1,41 @@
 package com.jackslan.taskmanager.utils
 
 import android.Manifest
+import android.content.Context
+import android.location.Location
 import android.os.Build
+import android.util.Log
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
+import androidx.lifecycle.lifecycleScope
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.jackslan.taskmanager.data.local.DataStoreManager
 import com.jackslan.taskmanager.presentation.MainActivity
+import kotlinx.coroutines.launch
 
-object LocationUtils  {
+object LocationUtils {
     @RequiresApi(Build.VERSION_CODES.N)
-    fun requestPermissions(activity: MainActivity) {
+    fun requestPermissions(
+        activity: MainActivity,
+        onPermissionGranted: () -> Unit = {},
+        onPermissionDenied: () -> Unit = {}
+    ) {
         val locationPermissionRequest = activity.registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
             when {
                 permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    // Precise location access granted.
+                    onPermissionGranted()
                 }
+
                 permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    // Only approximate location access granted.
+                    onPermissionGranted()
                 }
+
                 else -> {
-                    // No location access granted.
+                    onPermissionDenied()
                 }
             }
         }
@@ -35,5 +50,26 @@ object LocationUtils  {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
+    }
+
+    fun Context.isLocationPermissionGranted(): Boolean {
+        return ActivityCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.ACCESS_FINE_LOCATION
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(
+            this,
+            android.Manifest.permission.ACCESS_COARSE_LOCATION
+        ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+
+    }
+
+    fun Context.getAndCacheLocation(
+        onLocationReceived: (String) -> Unit
+    ) {
+        val fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        fusedLocationClient.lastLocation
+            .addOnSuccessListener { location: Location? ->
+                onLocationReceived("${location?.latitude}, ${location?.longitude}")
+            }
     }
 }

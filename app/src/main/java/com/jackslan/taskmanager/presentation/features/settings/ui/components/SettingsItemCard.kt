@@ -33,7 +33,7 @@ fun SettingsItemCard(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(Dimens.smallPadding)
+            .padding(Dimens.mediumPadding)
             .clickable { onClick() },
         elevation = CardDefaults.cardElevation(Dimens.cardElevation)
     ) {

@@ -28,27 +28,9 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var dataStoreManager: DataStoreManager
 
-    @RequiresPermission(allOf = [Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION])
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        LocationUtils.requestPermissions(this)
-
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        fusedLocationClient.lastLocation
-            .addOnSuccessListener { location: Location? ->
-
-                lifecycleScope.launch {
-                    dataStoreManager.storeCoordinates(
-                        coordinates = "${location?.latitude}, ${location?.longitude}"
-                    )
-
-                    Log.d(
-                        "Location",
-                        "Latitude: ${location?.latitude}, Longitude: ${location?.longitude}"
-                    )
-                }
-            }
 
         enableEdgeToEdge()
 

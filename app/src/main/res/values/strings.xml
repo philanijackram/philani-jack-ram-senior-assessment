@@ -33,4 +33,6 @@
     <string name="icon">icon</string>
     <string name="dark_mode_placeholder">Dark Mode</string>
     <string name="task_manager_logo">Task Manager Logo</string>
+    <string name="location_permission_required">Location Required</string>
+    <string name="location_permission_required_message">Please enable location to access accurate weather information</string>
 </resources>
