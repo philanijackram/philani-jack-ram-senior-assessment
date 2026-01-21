@@ -19,7 +19,6 @@ fun SplashScreen(
 ) {
 
     LaunchedEffect(true) {
-        Thread.sleep(3000)
         onNavigateToHome()
     }
 
