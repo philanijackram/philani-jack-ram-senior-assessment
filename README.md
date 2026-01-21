@@ -2,7 +2,7 @@
 Overview
 TODO list app that allows users to manage their tasks while also displaying the current weather information. The app will show the current temperature, as well as the sunrise and sunset times for the day, providing users with helpful context as they plan their activities.
 
-# Teck Stack
+# Tech Stack
 
 - Kotlin
 - Jetpack Compose
